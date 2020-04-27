@@ -5,9 +5,10 @@ import styled from 'styled-components'
 /*TODO:
     -axios request to get initial "best sleep"
     -fill in URL for weekly stats to be set to 6 days ago
-    -general styling
-
+    -general styling (esp mobile)
+    -If last night's entry is present, tell the user they already did that
 */
+
 const HomeContainer = styled.div`
 
     max-width: 800px;
@@ -54,6 +55,8 @@ const Home = _ => {
                 return history.push("/weekly-view/date") //this should reflect a week from today
             case "add":
                 return history.push("/entry/new-entry")
+            default: 
+                return null
         }
     }
     

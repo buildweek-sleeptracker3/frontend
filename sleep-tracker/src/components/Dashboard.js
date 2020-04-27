@@ -1,6 +1,5 @@
 import React from 'react'
 
-import WeeklyView from './WeeklyView'
 
 
 const Dashboard = _ => {
