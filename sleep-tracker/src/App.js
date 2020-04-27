@@ -46,11 +46,11 @@ function App() {
           <OptimalSleep />
         </Route>
 
-        <Route path='/weekly-view:start-date'>
+        <Route path='/weekly-view/:date'>
           <WeeklyView />
         </Route>
 
-        <Route path ='/entry:date'>
+        <Route path ='/entry/:date'>
           <EntryView />
         </Route>
 
