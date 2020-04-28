@@ -39,7 +39,7 @@ const blankForm = {
 
 
 const postUser = user => {
-    axios.post('', user)
+    axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/register', user)
     .then(res =>{
       console.log(res)
     })
@@ -92,11 +92,16 @@ const Signup = _ => {
 
                 <br /><br />
 
-                {/* <label>Age <br />
-                    <input></input>
+                <label>Age <br />
+                    <input
+                        name='age'
+                        type='number'
+                        min='2'
+                        max='120'
+                    ></input>
                 </label>
 
-                <br /><br /> */}
+                <br /><br />
 
                 <label>Email Address <br />
                     <input

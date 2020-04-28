@@ -28,38 +28,72 @@ const LoginStyle =styled.div`
     }
 `
 
-const Login = _ => ( 
 
-<LoginStyle>
-    <h1>Login</h1>
+const blankForm ={
+    username: '',
+    password: '',
+}
 
-    <form>
-        <label>Username <br />
-            <input
-                name='username'
-                type='text'
-            ></input>
-        </label>
 
-        <br /><br />
+const postUser = user => {
+    axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/login', user)
+    .then(res =>{
+      console.log(res)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+}
 
-        <label>Password   <br />
-            <input
-                name='password'
-                type='password'
-            ></input>
-        </label>
 
-        <br /><br />
-        <button>Log In</button>
+const Login = _ => { 
 
-        <br />< br/>
+    const [formValues, setFormValues] = useState(blankForm)
 
-        <Link to='/signup'>
-            <button>Sign Up</button>
-        </Link>
-    </form>
-</LoginStyle>
-)
+    const onLogin = evt => {
+        evt.preventDefault()
+
+        const userInfo = {
+            username: formValues.username,
+            password: formValues.password,
+        }
+
+        postUser(userInfo)
+        setFormValues(blankForm)
+    }
+
+    return(
+        <LoginStyle>
+            <h1>Login</h1>
+
+            <form onSubmit={onLogin}>
+                <label>Username <br />
+                    <input
+                        name='username'
+                        type='text'
+                    ></input>
+                </label>
+
+                <br /><br />
+
+                <label>Password   <br />
+                    <input
+                        name='password'
+                        type='password'
+                    ></input>
+                </label>
+
+                <br /><br />
+                <button>Log In</button>
+
+                <br />< br/>
+
+                <Link to='/signup'>
+                    <button>Sign Up</button>
+                </Link>
+            </form>
+        </LoginStyle>
+    )
+}
 
 export default Login
