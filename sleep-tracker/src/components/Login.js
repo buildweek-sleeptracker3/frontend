@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
+import * as yup from 'yup'
 
 const LoginStyle =styled.div`
     display: flex;
@@ -46,11 +47,47 @@ const postUser = user => {
     })
 }
 
+const formSchema = yup.object().shape({
+    
+    username: yup
+        .string()
+        .required('A Username is Required!'),
+  
+    password: yup
+      .string()
+      .required('You Must Enter a Password to Proceed'),
+});
+
 
 const Login = _ => { 
 
     const [formValues, setFormValues] = useState(blankForm)
+    const [formErrors, setFormErrors] = useState(blankForm)
     const history = useHistory()
+
+    const inputChange = evt => {
+        const name = evt.target.name
+        const value = evt.target.value
+    
+        yup
+          .reach(formSchema, name)
+          .validate(value)
+          .then(valid =>{
+            setFormErrors(
+              {...formErrors,
+              [name]:''})
+          })
+          .catch(err =>{
+            setFormErrors(
+              {...formErrors, 
+              [name]: err.errors[0]})
+          })
+    
+        setFormValues({
+          ...formValues,
+          [name]: value
+        })
+      }
 
     const onLogin = evt => {
         evt.preventDefault()
@@ -73,6 +110,7 @@ const Login = _ => {
                     <input
                         name='username'
                         type='text'
+                        onChange={inputChange}
                     ></input>
                 </label>
 
@@ -82,10 +120,19 @@ const Login = _ => {
                     <input
                         name='password'
                         type='password'
+                        onChange={inputChange}
                     ></input>
                 </label>
 
                 <br /><br />
+
+                <div className='errors'>
+                    {formErrors.username.length > 0 ? (<p>{formErrors.username}</p>) : null}
+                    {formErrors.password.length > 0 ? (<p>{formErrors.password}</p>) : null}
+                </div>
+
+                <br />
+
                 <input
                     className='log-in'
                     name='logIn'
