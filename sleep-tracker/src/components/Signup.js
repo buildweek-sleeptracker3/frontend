@@ -197,11 +197,10 @@ const Signup = _ => {
                     {formErrors.firstName.length > 0 ? (<p>{formErrors.firstName}</p>) : null}
                     {formErrors.lastName.length > 0 ? (<p>{formErrors.lastName}</p>) : null}
                     {formErrors.age.length > 0 ? (<p>{formErrors.age}</p>) : null}
-                    {formErrors.email.length > 0 ? (<p>{formErrors.email}</p>) : null} */}
-                 <div className='errors'>   
+                    {formErrors.email.length > 0 ? (<p>{formErrors.email}</p>) : null} 
                     {formErrors.username.length > 0 ? (<p>{formErrors.username}</p>) : null}
                     {formErrors.password.length > 0 ? (<p>{formErrors.password}</p>) : null}
-                </div> 
+                </div> */}
 
                 <br />
 
