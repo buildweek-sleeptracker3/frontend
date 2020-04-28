@@ -2,6 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { connect } from 'react-redux'
+
 /*TODO:
     -axios request to get initial "best sleep"
     -fill in URL for weekly stats to be set to 6 days ago
@@ -40,8 +42,13 @@ const HomeContainer = styled.div`
     }
 
 `
+const mapStateToProps = state => {
+    return {
+        name: state.user.firstName
+    }
+}
 
-const Home = _ => {
+const Home = props => {
 
     const history = useHistory()
 
@@ -62,7 +69,7 @@ const Home = _ => {
     
     return ( 
     <>
-    <h1>Welcome back</h1>
+    <h1>Welcome back, {props.name}</h1>
     <HomeContainer className = "home-container">
         <h2> You're at your best when you get 8 hours of sleep.</h2>
         
@@ -85,4 +92,4 @@ const Home = _ => {
 
 }
 
-export default Home;
+export default connect(mapStateToProps, {})(Home);

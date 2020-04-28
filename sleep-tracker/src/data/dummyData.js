@@ -1,8 +1,8 @@
 export const user = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    username: ""
+    firstName: "Victoria",
+    lastName: "Topham",
+    email: "victoria@topham.com",
+    username: "victoriatopham"
 }
 
 export const sleepMood = {
