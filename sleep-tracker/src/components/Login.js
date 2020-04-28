@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
+import axios from 'axios'
 
 const LoginStyle =styled.div`
     display: flex;
@@ -20,7 +21,7 @@ const LoginStyle =styled.div`
 
             }
 
-            button{
+            button, .log-in{
                 width: 100%;
                 height: 30px;
                 border-radius: 10px;
@@ -84,7 +85,11 @@ const Login = _ => {
                 </label>
 
                 <br /><br />
-                <button>Log In</button>
+                <input
+                    className='log-in'
+                    name='logIn'
+                    type='submit'
+                    value='Log In' />
 
                 <br />< br/>
 

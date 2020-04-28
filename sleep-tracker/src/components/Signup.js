@@ -21,7 +21,7 @@ const SignupStyle = styled.div`
 
             }
 
-            button{
+            .submit-btn{
                 width: 100%;
                 height: 30px;
                 border-radius: 10px;
@@ -130,7 +130,11 @@ const Signup = _ => {
 
                 <br /><br />
 
-                <button>Submit</button>
+                <input 
+                    className='submit-btn'
+                    name='submit'
+                    type='submit'
+                    value='Submit' />
             </form>
 
         </SignupStyle>
