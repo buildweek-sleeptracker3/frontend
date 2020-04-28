@@ -20,6 +20,6 @@ export const HIDE_EDIT_MODAL = 'HIDE_EDIT_MODAL'
 
 //functions for these actions
 
-export const showEditModal = () => dispatch => {
-    dispatch({type: SHOW_EDIT_MODAL})
+export const showEditModal = (data) => dispatch => {
+    dispatch({type: SHOW_EDIT_MODAL, payload: data})
 }

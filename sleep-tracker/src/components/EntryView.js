@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import DateTimePicker from 'react-datetime-picker'
 
+import { connect } from 'react-redux'
+
 
 const EntryContainer = styled.div`
 
@@ -29,12 +31,21 @@ const MoodPicker = styled.div`
     }
 `
 
-const EntryView = _ => {
+const mapStateToProps = state => {
+    return {
+        sleep: state.editModal.start,
+        wake: state.editModal.end,
+        mood: state.editModal.mood,
+        isEditing: state.modals.showEditModal
+    }
+}
+const EntryView = props => {
 
+    //set up the initial state for the entry. If we're editing, there will be values for these props. If we're not editing, they will be blank and we can start with a clean slate.
     const [entry, setEntry] = useState({
-        sleep: "",
-        wake: "",
-        mood: ""
+        sleep: props.sleep,
+        wake: props.wake,
+        mood: props.mood
     })
     
     const handleSleep = event => {
@@ -88,7 +99,7 @@ const EntryView = _ => {
                     <button name = "4" className = {entry.mood === "4" ? "selected-mood" : null}onClick = {handleMood} aria-label = "star-eye emoji">🤩</button>
                 </MoodPicker>
             </EntryContainer>
-            <button>Submit Entry</button>
+            <button>{props.isEditing ? "Update" : "Submit Entry"}</button>
         </form>
         </>
     )
@@ -98,4 +109,4 @@ const EntryView = _ => {
 
 
 
-export default EntryView
+export default connect(mapStateToProps, {})(EntryView)

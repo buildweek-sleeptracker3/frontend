@@ -8,6 +8,12 @@ const defaultState = {
     sleepMood: dataSleepMood,
     modals: {
         showEditModal: false
+    },
+    editModal: {
+        id: "",
+        start: "",
+        end: "",
+        mood: ""
     }
 }
 
@@ -20,7 +26,8 @@ export const reducer = (state = defaultState, action) => {
             modals: {
                 ...state.modals,
                 showEditModal: true
-            }
+            },
+            editModal: action.payload
         }
         default: return state
     }
