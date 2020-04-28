@@ -1,6 +1,7 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, {useState} from 'react'
+import {Link, useHistory} from 'react-router-dom'
 import styled from 'styled-components'
+import axios from 'axios'
 
 const LoginStyle =styled.div`
     display: flex;
@@ -20,7 +21,7 @@ const LoginStyle =styled.div`
 
             }
 
-            button{
+            button, .log-in{
                 width: 100%;
                 height: 30px;
                 border-radius: 10px;
@@ -28,38 +29,77 @@ const LoginStyle =styled.div`
     }
 `
 
-const Login = _ => ( 
 
-<LoginStyle>
-    <h1>Login</h1>
+const blankForm ={
+    username: '',
+    password: '',
+}
 
-    <form>
-        <label>Username <br />
-            <input
-                name='username'
-                type='text'
-            ></input>
-        </label>
 
-        <br /><br />
+const postUser = user => {
+    axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/login', user)
+    .then(res =>{
+      console.log(res)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+}
 
-        <label>Password   <br />
-            <input
-                name='password'
-                type='password'
-            ></input>
-        </label>
 
-        <br /><br />
-        <button>Log In</button>
+const Login = _ => { 
 
-        <br />< br/>
+    const [formValues, setFormValues] = useState(blankForm)
+    const history = useHistory()
 
-        <Link to='/signup'>
-            <button>Sign Up</button>
-        </Link>
-    </form>
-</LoginStyle>
-)
+    const onLogin = evt => {
+        evt.preventDefault()
+
+        const userInfo = {
+            username: formValues.username,
+            password: formValues.password,
+        }
+
+        postUser(userInfo)
+        history.push('/dashboard')
+    }
+
+    return(
+        <LoginStyle>
+            <h1>Login</h1>
+
+            <form onSubmit={onLogin}>
+                <label>Username <br />
+                    <input
+                        name='username'
+                        type='text'
+                    ></input>
+                </label>
+
+                <br /><br />
+
+                <label>Password   <br />
+                    <input
+                        name='password'
+                        type='password'
+                    ></input>
+                </label>
+
+                <br /><br />
+                <input
+                    className='log-in'
+                    name='logIn'
+                    type='submit'
+                    value='Log In' />
+
+                <br />< br/>
+
+                <Link to='/signup'>
+                    <button>Sign Up</button>
+                </Link>
+            </form>
+        </LoginStyle>
+    )
+}
 
 export default Login
