@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios'
+import axios from 'axios';
+import {useHistory} from 'react-router-dom';
 
 
 const SignupStyle = styled.div`
@@ -21,7 +22,7 @@ const SignupStyle = styled.div`
 
             }
 
-            button{
+            .submit-btn{
                 width: 100%;
                 height: 30px;
                 border-radius: 10px;
@@ -39,7 +40,7 @@ const blankForm = {
 
 
 const postUser = user => {
-    axios.post('', user)
+    axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/register', user)
     .then(res =>{
       console.log(res)
     })
@@ -52,7 +53,7 @@ const postUser = user => {
 const Signup = _ => { 
 
     const [formValues, setFormValues] = useState(blankForm)
-
+    const history = useHistory()
 
     const onSubmit = evt => {
         evt.preventDefault()
@@ -66,7 +67,7 @@ const Signup = _ => {
         }
         
         postUser(newUser)
-        setFormValues(blankForm)
+        history.push('/dashboard')
     }
 
     return(
@@ -92,11 +93,16 @@ const Signup = _ => {
 
                 <br /><br />
 
-                {/* <label>Age <br />
-                    <input></input>
+                <label>Age <br />
+                    <input
+                        name='age'
+                        type='number'
+                        min='2'
+                        max='120'
+                    ></input>
                 </label>
 
-                <br /><br /> */}
+                <br /><br />
 
                 <label>Email Address <br />
                     <input
@@ -125,7 +131,11 @@ const Signup = _ => {
 
                 <br /><br />
 
-                <button>Submit</button>
+                <input 
+                    className='submit-btn'
+                    name='submit'
+                    type='submit'
+                    value='Submit' />
             </form>
 
         </SignupStyle>
