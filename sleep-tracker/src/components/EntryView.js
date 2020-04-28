@@ -38,6 +38,7 @@ const EntryView = _ => {
     })
     
     const handleSleep = event => {
+        
         setEntry({
             ...entry,
             sleep: event
