@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
 
@@ -50,6 +50,7 @@ const postUser = user => {
 const Login = _ => { 
 
     const [formValues, setFormValues] = useState(blankForm)
+    const history = useHistory()
 
     const onLogin = evt => {
         evt.preventDefault()
@@ -60,7 +61,7 @@ const Login = _ => {
         }
 
         postUser(userInfo)
-        setFormValues(blankForm)
+        history.pushState(null, null, '/dashboard')
     }
 
     return(

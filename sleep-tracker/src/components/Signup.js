@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios'
+import axios from 'axios';
+import {useHistory} from 'react-router-dom';
 
 
 const SignupStyle = styled.div`
@@ -52,7 +53,7 @@ const postUser = user => {
 const Signup = _ => { 
 
     const [formValues, setFormValues] = useState(blankForm)
-
+    const history = useHistory()
 
     const onSubmit = evt => {
         evt.preventDefault()
@@ -66,7 +67,7 @@ const Signup = _ => {
         }
         
         postUser(newUser)
-        setFormValues(blankForm)
+        history.push('/dashboard')
     }
 
     return(
