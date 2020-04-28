@@ -61,7 +61,7 @@ const Login = _ => {
         }
 
         postUser(userInfo)
-        history.pushState(null, null, '/dashboard')
+        history.push('/dashboard')
     }
 
     return(
