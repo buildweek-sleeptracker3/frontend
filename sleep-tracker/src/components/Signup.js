@@ -32,8 +32,9 @@ const SignupStyle = styled.div`
 `
 
 const blankForm = {
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
+    age: '',
     email: '',
     username: '',
     password: '',
@@ -52,11 +53,11 @@ const postUser = user => {
 
 
 const formSchema = yup.object().shape({
-    firtsName: yup
+    first_name: yup
       .string()
       .required('A First Name is Required!'),
 
-    lastName: yup
+    last_name: yup
         .string()
         .required('A Last Name is Rewuired!'),
 
@@ -115,15 +116,16 @@ const Signup = _ => {
         evt.preventDefault()
     
         const newUser = {
-            firstName: formValues.firstName,
-            lastName: formValues.lastName,
+            first_name: formValues.first_name,
+            last_name: formValues.last_name,
+            age:formValues.age,
             email: formValues.email,
             username: formValues.username,
             password: formValues.password,
         }
         
         postUser(newUser)
-        history.push('/dashboard')
+        history.push('/login')
     }
 
     return(
@@ -133,8 +135,9 @@ const Signup = _ => {
             <form onSubmit={onSubmit} >
                 <label>First Name <br />
                     <input
-                        name='firstName'
+                        name='first_name'
                         type='text'
+                        value={formValues.firstName}
                         onChange={inputChange}
                     ></input>
                 </label>
@@ -143,8 +146,9 @@ const Signup = _ => {
 
                 <label>Last Name <br />
                     <input
-                        name='lastName'
+                        name='last_name'
                         type='text'
+                        value={formValues.lastName}
                         onChange={inputChange}
                     ></input>
                 </label>
@@ -157,6 +161,7 @@ const Signup = _ => {
                         type='number'
                         min='2'
                         max='120'
+                        value={formValues.age}
                         onChange={inputChange}
                     ></input>
                 </label>
@@ -167,6 +172,7 @@ const Signup = _ => {
                     <input
                         name='email'
                         type='email'
+                        value={formValues.email}
                         onChange={inputChange}
                     ></input>
                 </label>
@@ -177,6 +183,7 @@ const Signup = _ => {
                     <input
                         name='username'
                         type='text'
+                        value={formValues.username}
                         onChange={inputChange}
                     ></input>
                 </label>
@@ -187,6 +194,7 @@ const Signup = _ => {
                     <input
                         name='password'
                         type='password'
+                        value={formValues.password}
                         onChange={inputChange}
                     ></input>
                 </label>
