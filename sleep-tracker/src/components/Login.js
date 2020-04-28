@@ -40,7 +40,8 @@ const blankForm ={
 const postUser = user => {
     axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/login', user)
     .then(res =>{
-      console.log(res)
+        localStorage.setItem("token",res.data.token)
+        console.log(res)
     })
     .catch(err =>{
       console.log(err)
@@ -98,7 +99,7 @@ const Login = _ => {
         }
 
         postUser(userInfo)
-        history.push('/dashboard')
+        history.push('/home')
     }
 
     return(
@@ -110,6 +111,7 @@ const Login = _ => {
                     <input
                         name='username'
                         type='text'
+                        value={formValues.username}
                         onChange={inputChange}
                     ></input>
                 </label>
@@ -120,6 +122,7 @@ const Login = _ => {
                     <input
                         name='password'
                         type='password'
+                        value={formValues.password}
                         onChange={inputChange}
                     ></input>
                 </label>
