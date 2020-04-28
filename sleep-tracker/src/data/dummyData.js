@@ -13,7 +13,8 @@ export const sleepMood = {
     "7.5 - 8": 3.8,
     "8 - 8.5": 3,
     "8.5 - 9": 2.5,
-    "9 - 9.5": 2
+    "9 - 9.5": 2,
+    
 }
 
 export const data = [

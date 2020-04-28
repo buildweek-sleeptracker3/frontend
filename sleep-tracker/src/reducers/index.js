@@ -1,6 +1,6 @@
 import {user as dataUser, sleepMood as dataSleepMood, data as dataData} from '../data/dummyData'
 
-import { SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL } from '../actions/index'
+import { SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL,  } from '../actions/index'
 
 const defaultState = {
     user: dataUser,
