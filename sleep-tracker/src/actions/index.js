@@ -16,10 +16,15 @@ export const EDIT_ENTRY_SUCCESS = 'EDIT_ENTRY_SUCCESS'
 export const EDIT_ENTRY_FAIL = 'EDIT_ENTRY_FAIL'
 
 export const SHOW_EDIT_MODAL = 'SHOW_EDIT_MODAL'
-export const HIDE_EDIT_MODAL = 'HIDE_EDIT_MODAL'
+export const SUBMIT_EDIT_MODAL = 'HIDE_EDIT_MODAL'
 
 //functions for these actions
 
 export const showEditModal = (data) => dispatch => {
     dispatch({type: SHOW_EDIT_MODAL, payload: data})
+}
+
+export const submitEditModal = data => dispatch => {
+    dispatch({type: SUBMIT_EDIT_MODAL})
+    //make a request to edit using the data
 }

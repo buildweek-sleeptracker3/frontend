@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import DateTimePicker from 'react-datetime-picker'
 
 import { connect } from 'react-redux'
+import { submitEditModal } from '../actions/index'
 
 
 const EntryContainer = styled.div`
@@ -33,6 +34,7 @@ const MoodPicker = styled.div`
 
 const mapStateToProps = state => {
     return {
+        id: state.editModal.id,
         sleep: state.editModal.start,
         wake: state.editModal.end,
         mood: state.editModal.mood,
@@ -43,6 +45,7 @@ const EntryView = props => {
 
     //set up the initial state for the entry. If we're editing, there will be values for these props. If we're not editing, they will be blank and we can start with a clean slate.
     const [entry, setEntry] = useState({
+        id: props.id,
         sleep: props.sleep,
         wake: props.wake,
         mood: props.mood
@@ -73,7 +76,15 @@ const EntryView = props => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        //TODO: submit entry to the database, push to weekly view
+        //If we are editing, send a requst to update the edited information
+        if (props.isEditing) {
+            props.submitEditModal(entry)
+
+        } else {
+        //If we are adding a new entry, send a post request to do that entry and set the state to not editing anymore.
+
+
+        }
     }
 
     return(
@@ -109,4 +120,4 @@ const EntryView = props => {
 
 
 
-export default connect(mapStateToProps, {})(EntryView)
+export default connect(mapStateToProps, {submitEditModal})(EntryView)
