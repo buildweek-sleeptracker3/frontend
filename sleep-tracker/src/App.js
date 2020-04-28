@@ -1,13 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Route, Switch} from 'react-router-dom';
+
 import Home from './components/Home.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
 import Dashboard from './components/Dashboard.js';
 import OptimalSleep from './components/OptimalSleep';
-import WeeklyView from './components/WeeklyView.js';
+import WeeklyView from './components/weekly/WeeklyView.js';
 import EntryView from './components/EntryView.js';
 
 /*
@@ -46,11 +46,11 @@ function App() {
           <OptimalSleep />
         </Route>
 
-        <Route path='/weekly-view:start-date'>
+        <Route path='/weekly-view/:date'>
           <WeeklyView />
         </Route>
 
-        <Route path ='/entry:date'>
+        <Route path ='/entry/:date'>
           <EntryView />
         </Route>
 
