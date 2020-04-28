@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { connect } from 'react-redux'
+import axios from 'axios'
 
 /*TODO:
     -axios request to get initial "best sleep"
@@ -82,10 +83,27 @@ const Home = props => {
                 return null
         }
     }
+
+    const handleTemp = event => {
+        event.preventDefault();
+
+        
+        //test create
+        // axios.post(`https://sleeptrackerbackend.herokuapp.com/api/auth/register`,{username: "victoriat", password: "12345", first_name: "victoria", last_name: "topham", age: 26})
+        // .then(res => console.log(res))
+        // .catch(err => console.log(err))
+
+
+        // test login
+        // axios.post(`https://sleeptrackerbackend.herokuapp.com/api/auth/login`,{username: "CodyD", password: "12345"})
+        // .then(res => localStorage.setItem("token",res.data.token))
+        // .catch(err => console.log(err))
+    }
     
     return ( 
     <>
     <h1>Welcome back, {props.name}</h1>
+    {/* <button onClick = {handleTemp}>Click me to log in</button> */}
     <HomeContainer className = "home-container">
         <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
         
