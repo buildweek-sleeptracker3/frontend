@@ -7,7 +7,7 @@ import Login from './components/Login.js';
 import Signup from './components/Signup.js';
 import Dashboard from './components/Dashboard.js';
 import OptimalSleep from './components/OptimalSleep';
-import WeeklyView from './components/WeeklyView.js';
+import WeeklyView from './components/weekly/WeeklyView.js';
 import EntryView from './components/EntryView.js';
 
 /*

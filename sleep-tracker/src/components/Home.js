@@ -44,11 +44,27 @@ const HomeContainer = styled.div`
 `
 const mapStateToProps = state => {
     return {
-        name: state.user.firstName
+        name: state.user.firstName,
+        moodData: state.sleepMood
     }
 }
 
 const Home = props => {
+
+    
+    const sleepKeys = Object.keys(props.moodData)
+    let maxScore = props.moodData[sleepKeys[0]]
+    let maxKey = sleepKeys[0]
+    sleepKeys.map(key => {
+        if (props.moodData[key] > maxScore) {
+            maxScore = props.moodData[key]
+            maxKey = key
+        }
+    })
+
+    console.log(maxScore, maxKey)
+
+    
 
     const history = useHistory()
 
@@ -71,7 +87,7 @@ const Home = props => {
     <>
     <h1>Welcome back, {props.name}</h1>
     <HomeContainer className = "home-container">
-        <h2> You're at your best when you get 8 hours of sleep.</h2>
+        <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
         
         <button name = "optimal" onClick = {handleClick} >
             Learn more
