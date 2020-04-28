@@ -5,12 +5,24 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
 
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import { reducer } from './reducers/index'
+import thunk from 'redux-thunk'
+
+//Set up the redux store and use thunk as middleware to dispatch actions
+const store = createStore(reducer, applyMiddleware(thunk)) 
+
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+  <Provider store = {store}> {/*wrap the app in the store*/}
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>
+  ,
+
   document.getElementById('root')
 );
 
