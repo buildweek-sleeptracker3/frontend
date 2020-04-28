@@ -15,8 +15,11 @@ export const EDIT_ENTRY_START = 'EDIT_ENTRY_START'
 export const EDIT_ENTRY_SUCCESS = 'EDIT_ENTRY_SUCCESS'
 export const EDIT_ENTRY_FAIL = 'EDIT_ENTRY_FAIL'
 
-export const getMoodHistory = _ => dispatch => {
-    dispatch({type: FETCH_MOOD_HISTORY_START})
-    //TODO: add axios request
-    
+export const SHOW_EDIT_MODAL = 'SHOW_EDIT_MODAL'
+export const HIDE_EDIT_MODAL = 'HIDE_EDIT_MODAL'
+
+//functions for these actions
+
+export const showEditModal = () => dispatch => {
+    dispatch({type: SHOW_EDIT_MODAL})
 }

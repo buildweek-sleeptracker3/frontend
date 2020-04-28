@@ -17,6 +17,7 @@ const WeeklyView = props => {
         {props.data.map(item => {
             return <DayDisplayCard start = {item.start} end = {item.end} mood = {item.mood}/>
         })}
+        
     </>)
 
 }
