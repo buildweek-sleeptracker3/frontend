@@ -1,3 +1,5 @@
+//This held dummy data but as of now the only export being used is sleepMood
+
 export const user = {
     firstName: "Victoria",
     lastName: "Topham",
@@ -13,41 +15,48 @@ export const sleepMood = {
     "7.5 - 8": 3.8,
     "8 - 8.5": 3,
     "8.5 - 9": 2.5,
-    "9 - 9.5": 2
+    "9 - 9.5": 2,
+    
 }
 
 export const data = [
     {
+        id: 1,
         start: "Wed Apr 01 2020 21:00:00 GMT-0700 (Pacific Daylight Time)",
         end: "Thu Apr 02 2020 06:00:00 GMT-0700 (Pacific Daylight Time)",
         mood: 3
     },
 
     {
+        id: 2,
         start: "Thu Apr 02 2020 20:30:00 GMT-0700 (Pacific Daylight Time)",
         end: "Fri Apr 03 2020 06:00:00 GMT-0700 (Pacific Daylight Time)",
         mood: 4
     },
 
     {
+        id: 3,
         start: "Fri Apr 03 2020 21:00:00 GMT-0700 (Pacific Daylight Time)",
         end: "Sat Apr 04 2020 06:00:00 GMT-0700 (Pacific Daylight Time)",
         mood: 2
     },
 
     {
+        id: 4,
         start: "Sat Apr 04 2020 22:00:00 GMT-0700 (Pacific Daylight Time)",
         end: "Sun Apr 05 2020 06:00:00 GMT-0700 (Pacific Daylight Time)",
         mood: 3
     },
 
     {
+        id: 5,
         start: "Sun Apr 05 2020 21:00:00 GMT-0700 (Pacific Daylight Time)",
         end: "Mon Apr 06 2020 06:00:00 GMT-0700 (Pacific Daylight Time)",
         mood: 2
     },
 
     {
+        id: 6,
         start: "Mon Apr 06 2020 23:20:00 GMT-0700 (Pacific Daylight Time)",
         end: "Mon Apr 07 2020 20:00:00 GMT-0700 (Pacific Daylight Time)",
         mood: 4

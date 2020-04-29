@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { login } from '../actions/index'
 import styled from 'styled-components'
 import axios from 'axios'
 import * as yup from 'yup'
@@ -64,16 +66,6 @@ const blankForm ={
 }
 
 
-const postUser = user => {
-    axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/login', user)
-    .then(res =>{
-        localStorage.setItem("token",res.data.token)
-        console.log(res)
-    })
-    .catch(err =>{
-      console.log(err)
-    })
-}
 
 const formSchema = yup.object().shape({
     
@@ -87,7 +79,21 @@ const formSchema = yup.object().shape({
 });
 
 
-const Login = _ => { 
+const Login = props => { 
+
+    const postUser = user => {
+        axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/login', user)
+        .then(res =>{
+            localStorage.setItem("token",JSON.stringify(res.data.token))
+            props.login(res.data.userId)
+            console.log(res)
+            history.push('/home')
+            
+        })
+        .catch(err =>{
+          console.log(err)
+        })
+    }
 
     const [formValues, setFormValues] = useState(blankForm)
     const [formErrors, setFormErrors] = useState(blankForm)
@@ -126,7 +132,7 @@ const Login = _ => {
         }
 
         postUser(userInfo)
-        history.push('/home')
+        
     }
 
     return(
@@ -179,4 +185,4 @@ const Login = _ => {
     )
 }
 
-export default Login
+export default connect(null, {login})(Login)
