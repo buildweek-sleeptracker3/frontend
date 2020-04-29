@@ -1,13 +1,14 @@
 import {user as dataUser, sleepMood as dataSleepMood, data as dataData} from '../data/dummyData'
 
-import { SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL, FETCH_SLEEP_DATA, UPDATE_EDIT  } from '../actions/index'
+import { SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL, FETCH_SLEEP_DATA, UPDATE_EDIT, DELETE_SLEEP_DATA, DONE_DELETING  } from '../actions/index'
 
 const defaultState = {
     user: dataUser,
     data: dataData,
     sleepMood: dataSleepMood,
     modals: {
-        showEditModal: false
+        showEditModal: false,
+        isDeleting: false
     },
     editModal: {
         hours: "",
@@ -65,6 +66,23 @@ export const reducer = (state = defaultState, action) => {
                 ...state,
                 [state.data[index]]: action.payload
 
+            }
+        case DELETE_SLEEP_DATA:
+            return {
+                ...state,
+                modals: {
+                    ...state.modals,
+                    isDeleting: true
+                }
+            }
+
+        case DONE_DELETING: 
+            return {
+                ...state,
+                [state.modals]: {
+                    ...state.modals,
+                    isDeleting: false
+                }
             }
         default: return state
     }

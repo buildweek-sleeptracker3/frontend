@@ -23,6 +23,9 @@ export const FETCH_SLEEP_DATA = 'FETCH_SLEEP_DATA'
 
 export const ADD_SLEEP_DATA = 'ADD_SLEEP_DATA'
 
+export const DELETE_SLEEP_DATA = 'DELETE_SLEEP_DATA'
+export const DONE_DELETING = 'DONT_DELETING'
+
 //functions for these actions
 
 export const showEditModal = (data) => dispatch => {
@@ -36,7 +39,7 @@ export const submitEditModal = data => dispatch => {
         .put(`/api/users/sleep/${data.id}`, data)
         .then(res => {
             console.log(res.data.data)
-            //TODO: make this better by simply inserting the returned change
+            //update the datum that we just updated in state
             dispatch({type: UPDATE_EDIT, payload: res.data.data})
         })
         .catch(err => console.log(err))
@@ -59,11 +62,18 @@ export const addSleepData = data => dispatch => {
         .post('/api/users/sleep',data)
         .then(res => {
             console.log(res)
-            dispatch({type: FETCH_SLEEP_DATA, payload: res.data})
         })
         .catch(err => console.log(err))
-
-        
 }
 
-
+export const deleteSleepData = data => dispatch => {
+    dispatch({type: DELETE_SLEEP_DATA})
+    axiosWithAuth()
+        .delete(`/api/users/sleep/${data.id}`)
+        .then(res => {
+            console.log(res)
+            dispatch({type: DONE_DELETING})
+            
+        })
+        .catch(err => console.log(err))
+}

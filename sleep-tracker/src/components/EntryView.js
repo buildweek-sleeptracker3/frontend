@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import DateTimePicker from 'react-datetime-picker'
+import { useHistory } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { submitEditModal, addSleepData } from '../actions/index.js'
@@ -48,6 +49,7 @@ const mapStateToProps = state => {
 const EntryView = props => {
     // console.log(props.editObj)
 
+    const history = useHistory()
     //set up the initial state for the entry. If we're editing, there will be values for these props. If we're not editing, they will be blank and we can start with a clean slate.
     const [entry, setEntry] = useState(props.editObj)
     
@@ -84,9 +86,10 @@ const EntryView = props => {
         //If we are adding a new entry, send a post request to do that entry and set the state to not editing anymore.
             //TODO: calculate the hours, dynamic userID
             props.addSleepData({userId: 8, sleep_start: entry.sleep_start, sleep_end: entry.sleep_end, hours: entry.hours, mood: entry.mood})
+            history.push("/weekly-view/date")
         }
     }
-
+    
     return(
         <>
         <h1>New Entry</h1>

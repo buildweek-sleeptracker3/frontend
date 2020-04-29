@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { showEditModal } from '../../actions/index'
+import { showEditModal, deleteSleepData } from '../../actions/index'
 import EntryView from '../EntryView'
 
 var dateFormat = require('dateformat')
@@ -53,12 +53,21 @@ const DayDisplayCard = props => {
 
 
     }
+
+    const handleDelete = event => {
+        event.preventDefault()
+        props.deleteSleepData(data)
+
+
+        
+    }
     return(
         <DayCard>
             <p>{sleepDate}</p>
             <div className = "sleep-times">
                 <p>Asleep: {sleepStart} | Awake: {sleepEnd} | Mood: {data.mood}</p>
                 <button onClick = {handleEdit}>Edit Entry</button>
+                <button onClick = {handleDelete}>Delete Entry</button>
             </div>
             {props.editing && props.editID === data.id ? <EntryView /> : null}
 
@@ -66,4 +75,4 @@ const DayDisplayCard = props => {
     )
 }
 
-export default connect(mapStateToProps, {showEditModal})(DayDisplayCard)
+export default connect(mapStateToProps, {showEditModal, deleteSleepData})(DayDisplayCard)
