@@ -13,8 +13,8 @@ const defaultState = {
         hours: "",
         id: "",
         mood: "",
-        sleep_end: "",
-        sleep_start: "",
+        sleep_end: 0,
+        sleep_start: 0,
         userId: ""
     }
 }

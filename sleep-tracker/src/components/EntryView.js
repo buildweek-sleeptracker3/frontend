@@ -55,14 +55,14 @@ const EntryView = props => {
         
         setEntry({
             ...entry,
-            sleep: event
+            sleep_start: event
         })
     }
 
     const handleWake = event => {
         setEntry({
             ...entry,
-            wake: event
+            sleep_end: event
         })
     }
 
@@ -83,7 +83,7 @@ const EntryView = props => {
         } else {
         //If we are adding a new entry, send a post request to do that entry and set the state to not editing anymore.
             //TODO: calculate the hours, dynamic userID
-            props.addSleepData({userID: 8, sleep_start: entry.sleep, sleep_end: entry.wake, hours: 0, mood: entry.mood})
+            props.addSleepData({userID: 8, sleep_start: entry.sleep_start, sleep_end: entry.sleep_end, hours: entry.hours, mood: entry.mood})
         }
     }
 
@@ -104,10 +104,10 @@ const EntryView = props => {
             <EntryContainer>
                 <p className = "entry-container">Rate your mood throughout the day.</p>
                 <MoodPicker className = "mood-picker">
-                    <button name = "1" className = {entry.mood === "1" ? "selected-mood" : null} onClick = {handleMood} aria-label = "scream emoji">😱</button>
-                    <button name = "2" className = {entry.mood === "2" ? "selected-mood" : null}onClick = {handleMood}  aria-label = "slight frown emoji">😕</button>
-                    <button name = "3" className = {entry.mood === "3" ? "selected-mood" : null}onClick = {handleMood} aria-label = "happy emoji">😊</button>
-                    <button name = "4" className = {entry.mood === "4" ? "selected-mood" : null}onClick = {handleMood} aria-label = "star-eye emoji">🤩</button>
+                    <button name = "1" className = {entry.mood.toString() === "1" ? "selected-mood" : null} onClick = {handleMood} aria-label = "scream emoji">😱</button>
+                    <button name = "2" className = {entry.mood.toString() === "2" ? "selected-mood" : null}onClick = {handleMood}  aria-label = "slight frown emoji">😕</button>
+                    <button name = "3" className = {entry.mood.toString() === "3" ? "selected-mood" : null}onClick = {handleMood} aria-label = "happy emoji">😊</button>
+                    <button name = "4" className = {entry.mood.toString() === "4" ? "selected-mood" : null}onClick = {handleMood} aria-label = "star-eye emoji">🤩</button>
                 </MoodPicker>
             </EntryContainer>
             <button>{props.isEditing ? "Update" : "Submit Entry"}</button>
