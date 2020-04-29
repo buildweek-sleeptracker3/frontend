@@ -1,11 +1,12 @@
-import {user as dataUser, sleepMood as dataSleepMood, data as dataData} from '../data/dummyData'
+import {sleepMood as dataSleepMood} from '../data/dummyData'
 
-import { SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL, FETCH_SLEEP_DATA, UPDATE_EDIT, DELETE_SLEEP_DATA, DONE_DELETING  } from '../actions/index'
+import { LOGIN, SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL, FETCH_SLEEP_DATA, UPDATE_EDIT, CANCEL_EDIT, DELETE_SLEEP_DATA, DONE_DELETING  } from '../actions/index'
 
 const defaultState = {
-    user: dataUser,
-    data: dataData,
-    sleepMood: dataSleepMood,
+    // user: dataUser,
+    userId: window.localStorage.getItem("userId"),
+    data: null,
+    sleepMood: dataSleepMood, //still waiting on an endpoint for this
     modals: {
         showEditModal: false,
         isDeleting: false
@@ -23,6 +24,13 @@ const defaultState = {
 export const reducer = (state = defaultState, action) => {
 
     switch(action.type) {
+        
+        case LOGIN: 
+        console.log("you have reached the reducer", action.payload)
+        return {
+            ...state,
+            userId: action.payload
+        }
         case SHOW_EDIT_MODAL: //set state to true and get ready
         return {
             ...state,
@@ -33,6 +41,22 @@ export const reducer = (state = defaultState, action) => {
             editModal: action.payload
         }
         case SUBMIT_EDIT_MODAL: //If we're submitting the edit modal then reset editing
+            return {
+                ...state,
+                modals: {
+                    ...state.modals,
+                    showEditModal: false
+                },
+                editModal: {
+                    hours: "",
+                    id: "",
+                    mood: "",
+                    sleep_end: "",
+                    sleep_start: "",
+                    userId: ""
+                }
+            }
+        case CANCEL_EDIT:
             return {
                 ...state,
                 modals: {

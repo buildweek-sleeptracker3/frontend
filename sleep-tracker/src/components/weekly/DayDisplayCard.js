@@ -18,7 +18,7 @@ padding: 1% 2%;
 const mapStateToProps = state => {
     return {
         showEditModal: state.modals.showEditModal,
-        username: state.user.userName,
+        // username: state.user.userName,
 
         editID: state.editModal.id,
         editStart: state.editModal.start,
@@ -61,11 +61,12 @@ const DayDisplayCard = props => {
 
         
     }
+
     return(
         <DayCard>
             <p>{sleepDate}</p>
             <div className = "sleep-times">
-                <p>Asleep: {sleepStart} | Awake: {sleepEnd} | Mood: {data.mood}</p>
+                <p>Asleep: {sleepStart} | Awake: {sleepEnd} | Asleep for {data.hours} hours. | Mood: {data.mood} </p>
                 <button onClick = {handleEdit}>Edit Entry</button>
                 <button onClick = {handleDelete}>Delete Entry</button>
             </div>
