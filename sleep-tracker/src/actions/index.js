@@ -26,7 +26,13 @@ export const ADD_SLEEP_DATA = 'ADD_SLEEP_DATA'
 export const DELETE_SLEEP_DATA = 'DELETE_SLEEP_DATA'
 export const DONE_DELETING = 'DONT_DELETING'
 
+export const LOGIN = "LOGIN"
+
 //functions for these actions
+
+export const login = userId => dispatch => {
+    dispatch({type: LOGIN, payload: userId})
+}
 
 export const showEditModal = (data) => dispatch => {
     dispatch({type: SHOW_EDIT_MODAL, payload: data})
@@ -50,14 +56,14 @@ export const fetchSleepData = _ => dispatch => {
     axiosWithAuth()
         .get('/api/users/sleep')
         .then(res => {
-            console.log(res)
+            // console.log(res)
             dispatch({type: FETCH_SLEEP_DATA, payload: res.data})
             })
         .catch(err => console.log(err))
 }
 
 export const addSleepData = data => dispatch => {
-    
+    console.log(data)
     axiosWithAuth()
         .post('/api/users/sleep',data)
         .then(res => {

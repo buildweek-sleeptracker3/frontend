@@ -1,9 +1,10 @@
 import {user as dataUser, sleepMood as dataSleepMood, data as dataData} from '../data/dummyData'
 
-import { SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL, FETCH_SLEEP_DATA, UPDATE_EDIT, DELETE_SLEEP_DATA, DONE_DELETING  } from '../actions/index'
+import { LOGIN, SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL, FETCH_SLEEP_DATA, UPDATE_EDIT, DELETE_SLEEP_DATA, DONE_DELETING  } from '../actions/index'
 
 const defaultState = {
     user: dataUser,
+    userId: 1,
     data: dataData,
     sleepMood: dataSleepMood,
     modals: {
@@ -23,6 +24,13 @@ const defaultState = {
 export const reducer = (state = defaultState, action) => {
 
     switch(action.type) {
+        
+        case LOGIN: 
+        console.log("you have reached the reducer", action.payload)
+        return {
+            ...state,
+            userId: action.payload
+        }
         case SHOW_EDIT_MODAL: //set state to true and get ready
         return {
             ...state,
