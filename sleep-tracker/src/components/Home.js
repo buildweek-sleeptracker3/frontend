@@ -104,12 +104,18 @@ const Home = props => {
         //     .get('/api/users')
         //     .then(res => console.log(res))
         //     .catch(err => console.log(err))
+
+        //test get sleep by userid
+        axiosWithAuth()
+            .get(`/api/users/id/sleep/${props.id}`)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
     
     return ( 
     <>
     <h1>Welcome, user number {props.id}</h1>
-    {/* <button onClick = {handleTemp}>Click me to log in</button> */}
+    <button onClick = {handleTemp}>Click me to log in</button>
     <HomeContainer className = "home-container">
         <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
         
