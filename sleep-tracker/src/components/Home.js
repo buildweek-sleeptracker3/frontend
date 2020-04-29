@@ -100,16 +100,16 @@ const Home = props => {
         // .catch(err => console.log(err))
 
         //test get user
-        // axiosWithAuth()
-        //     .get('/api/users')
-        //     .then(res => console.log(res))
-        //     .catch(err => console.log(err))
+        axiosWithAuth()
+            .get('/api/users')
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
     
     return ( 
     <>
     <h1>Welcome back, {props.name}</h1>
-    {/* <button onClick = {handleTemp}>Click me to log in</button> */}
+    <button onClick = {handleTemp}>Click me to log in</button>
     <HomeContainer className = "home-container">
         <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
         

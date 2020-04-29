@@ -83,7 +83,7 @@ const EntryView = props => {
         } else {
         //If we are adding a new entry, send a post request to do that entry and set the state to not editing anymore.
             //TODO: calculate the hours, dynamic userID
-            props.addSleepData({userID: 8, sleep_start: entry.sleep_start, sleep_end: entry.sleep_end, hours: entry.hours, mood: entry.mood})
+            props.addSleepData({userId: 8, sleep_start: entry.sleep_start, sleep_end: entry.sleep_end, hours: entry.hours, mood: entry.mood})
         }
     }
 

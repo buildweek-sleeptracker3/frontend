@@ -57,7 +57,7 @@ const DayDisplayCard = props => {
         <DayCard>
             <p>{sleepDate}</p>
             <div className = "sleep-times">
-                <p>Asleep: {sleepStart} | Awake: {sleepEnd} | Hours Slept: {hoursSlept}</p>
+                <p>Asleep: {sleepStart} | Awake: {sleepEnd} | Mood: {data.mood}</p>
                 <button onClick = {handleEdit}>Edit Entry</button>
             </div>
             {props.editing && props.editID === data.id ? <EntryView /> : null}

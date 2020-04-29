@@ -6,7 +6,8 @@ import { fetchSleepData } from '../../actions/index'
 
 const mapStateToProps = state => {
     return {
-        data: state.data
+        data: state.data,
+        isEditing: state.modals.showEditModal
     }
 }
 
@@ -18,8 +19,8 @@ const WeeklyView = props => {
 
     useEffect(_ => {
         refreshData() 
-    },[])
-    //TODO: add a button to request data from a new week
+    },[props.isEditing]) //we want this to refresh whenever the edit view is closed
+    
     return ( 
     <>
         <h1>This is the weekly view page</h1> 

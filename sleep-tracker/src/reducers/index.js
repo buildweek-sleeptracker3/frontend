@@ -1,6 +1,6 @@
 import {user as dataUser, sleepMood as dataSleepMood, data as dataData} from '../data/dummyData'
 
-import { SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL, FETCH_SLEEP_DATA  } from '../actions/index'
+import { SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL, FETCH_SLEEP_DATA, UPDATE_EDIT  } from '../actions/index'
 
 const defaultState = {
     user: dataUser,
@@ -52,10 +52,20 @@ export const reducer = (state = defaultState, action) => {
                 ...state,
                 data: action.payload
             }
-        // case ADD_SLEEP_DATA:
-        //     return {
-        //         ...state
-        //     }
+        case UPDATE_EDIT: 
+            let index = ""
+        //find the index of where the object with the id i'm editing is 
+            state.data.map((datum, i) => {
+                if (datum.id === action.payload.id) {
+                    index = i
+                }
+            })
+            console.log("index:", index)
+            return {
+                ...state,
+                [state.data[index]]: action.payload
+
+            }
         default: return state
     }
 }
