@@ -83,6 +83,7 @@ const EntryView = props => {
         //If we are editing, send a requst to update the edited information
 
         const hoursSlept = (Math.round((Date.parse(entry.sleep_end) - Date.parse(entry.sleep_start)) / 360000) / 10)
+        //TODOL add this to state
         console.log(hoursSlept)
         setEntry({
             ...entry,
@@ -94,7 +95,7 @@ const EntryView = props => {
         } else {
         //If we are adding a new entry, send a post request to do that entry and set the state to not editing anymore.
             //TODO: calculate the hours, dynamic userID
-            props.addSleepData({userId: props.userId, sleep_start: entry.sleep_start, sleep_end: entry.sleep_end, hours: entry.hours, mood: entry.mood})
+            props.addSleepData({userId: props.userId, sleep_start: entry.sleep_start, sleep_end: entry.sleep_end, hours: hoursSlept, mood: entry.mood})
             history.push("/weekly-view/date")
         }
     }

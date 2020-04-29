@@ -61,11 +61,12 @@ const DayDisplayCard = props => {
 
         
     }
+
     return(
         <DayCard>
             <p>{sleepDate}</p>
             <div className = "sleep-times">
-                <p>Asleep: {sleepStart} | Awake: {sleepEnd} | Mood: {data.mood}</p>
+                <p>Asleep: {sleepStart} | Awake: {sleepEnd} | Asleep for {data.hours} hours. | Mood: {data.mood} </p>
                 <button onClick = {handleEdit}>Edit Entry</button>
                 <button onClick = {handleDelete}>Delete Entry</button>
             </div>

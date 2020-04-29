@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Route, Switch} from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute'
 
 import Home from './components/Home.js';
 import Login from './components/Login.js';
@@ -38,29 +39,18 @@ function App() {
           <Signup />
         </Route>
 
-        <Route path='/dashboard'>
-          <Dashboard />
-        </Route>
+        <PrivateRoute path='/dashboard' component = {Dashboard}/>
 
-        <Route path='/optimal-sleep'>
-          <OptimalSleep />
-        </Route>
+        <PrivateRoute path='/weekly-view/:date' component = {WeeklyView}/>
+        
+        <PrivateRoute path ='/entry/:date' component = {EntryView}/>
+        
 
-        <Route path='/weekly-view/:date'>
-          <WeeklyView />
-        </Route>
+        <PrivateRoute path='/entry' component = {EntryView}/>
+        
 
-        <Route path ='/entry/:date'>
-          <EntryView />
-        </Route>
-
-        <Route path='/entry'>
-          <EntryView />
-        </Route>
-
-        <Route path='/'>
-          <Home />
-        </Route>
+        <PrivateRoute path='/' component = {Home}/>
+        
 
       </Switch>
     </div>

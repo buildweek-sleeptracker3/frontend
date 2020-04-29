@@ -70,6 +70,7 @@ const Login = props => {
         .then(res =>{
             localStorage.setItem("token",JSON.stringify(res.data.token))
             props.login(res.data.userId)
+            history.push('/home')
             
         })
         .catch(err =>{
@@ -114,7 +115,7 @@ const Login = props => {
         }
 
         postUser(userInfo)
-        history.push('/home')
+        
     }
 
     return(
