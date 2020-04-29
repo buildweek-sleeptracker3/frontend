@@ -40,8 +40,8 @@ const blankForm ={
 const postUser = user => {
     axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/login', user)
     .then(res =>{
-        localStorage.setItem("token",res.data.token)
-        console.log(res)
+        localStorage.setItem("token",JSON.stringify(res.data.token))
+        console.log(res.data.token)
     })
     .catch(err =>{
       console.log(err)
