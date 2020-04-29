@@ -4,7 +4,7 @@ import { LOGIN, SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL, FETCH_SLEEP_DATA, UPDATE_EDI
 
 const defaultState = {
     user: dataUser,
-    userId: 1,
+    userId: window.localStorage.getItem("userId"),
     data: dataData,
     sleepMood: dataSleepMood,
     modals: {

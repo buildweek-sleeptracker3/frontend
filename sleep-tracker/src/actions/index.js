@@ -31,6 +31,7 @@ export const LOGIN = "LOGIN"
 //functions for these actions
 
 export const login = userId => dispatch => {
+    window.localStorage.setItem("userId",userId)
     dispatch({type: LOGIN, payload: userId})
 }
 
