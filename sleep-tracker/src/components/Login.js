@@ -9,24 +9,51 @@ const LoginStyle =styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 375px;
+    width: 100vw;
+    height:100vh;
     padding: 5px;
+    background-color: #121212;
+
+    h1{
+        color: #E5EFF2;
+    }
 
     form {
+            label{
+                color: #A7A7A7;
+            }
 
             input{
                 width: 100%;
                 height: 30px;
+                padding: 3%;
+                font-size: 1.1rem;
+                border: none;
                 border-radius: 5px 5px 0 0; 
                 box-sizing: border-box;
+                background-color: #232323;
+                color: #E4E4E4;
 
             }
 
-            button, .log-in{
+            .log-in{
                 width: 100%;
-                height: 30px;
+                height: 35px;
                 border-radius: 10px;
+                background-color: #39859D;
+                color: #E5EFF2;
             }
+
+            .signUp{
+                width: 100%;
+                height: 35px;
+                font-size: 1.2rem;
+                border: 5px, solid, #25859D;
+                border-radius: 10px;
+                background-color: #121212;
+                color: #25859D;
+            }
+
     }
 `
 
@@ -145,7 +172,7 @@ const Login = _ => {
                 <br />< br/>
 
                 <Link to='/signup'>
-                    <button>Sign Up</button>
+                    <button className='signUp'>Sign Up</button>
                 </Link>
             </form>
         </LoginStyle>

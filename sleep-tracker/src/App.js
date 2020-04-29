@@ -4,7 +4,8 @@ import {Route, Switch} from 'react-router-dom';
 
 import Home from './components/Home.js';
 import Login from './components/Login.js';
-import Signup from './components/Signup.js';
+import Signup from './components/signup/Signup.js';
+import SignupConfirm from './components/signup/SignupConfirm.js'
 import Dashboard from './components/Dashboard.js';
 import OptimalSleep from './components/OptimalSleep';
 import WeeklyView from './components/weekly/WeeklyView.js';
@@ -36,6 +37,10 @@ function App() {
 
         <Route path='/signup'>
           <Signup />
+        </Route>
+
+        <Route path='/signup-confirm'>
+          <SignupConfirm />
         </Route>
 
         <Route path='/dashboard'>
