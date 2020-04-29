@@ -7,8 +7,6 @@ import Home from './components/Home.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
 import Dashboard from './components/Dashboard.js';
-import OptimalSleep from './components/OptimalSleep';
-// import WeeklyView from './components/sleepdata/WeeklyView.js';
 import SleepView from './components/sleepdata/SleepView.js'
 import EntryView from './components/EntryView.js';
 

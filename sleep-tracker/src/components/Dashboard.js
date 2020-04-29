@@ -8,14 +8,13 @@ const mapStateToProps = state => {
         moodData: state.sleepMood
     }
 }
+
 //This renders the sleep/mood calculations
 const Dashboard = props => {
 
-    const rawData = [0, 1, 2, 3, 4, 5, 5, 5, 3]
-    const keysArray = Object.keys(props.moodData)
     
-
-    const binnedData = keysArray.map(key => {
+    //we have to update the shape of the data for it to work with the graphing library
+    const binnedData = Object.keys(props.moodData).map(key => {
         return {
             id: key,
             bin: key,
@@ -23,17 +22,16 @@ const Dashboard = props => {
         }
     })
     
-
+    //display a graph of the sleep data vs. mood
     return ( 
         <>
-
-    <h1>Your Sleep Mood</h1>
-    <HomeButton />
-        <Histogram width = "500" height = "500" binType = "categorical">
-            <BarSeries binnedData = {binnedData}/>
-            <XAxis />
-            <YAxis />
-        </Histogram>
+            <h1>Your Sleep Mood</h1>
+            <HomeButton />
+            <Histogram width = "500" height = "500" binType = "categorical">
+                <BarSeries binnedData = {binnedData}/>
+                <XAxis label = "Hours of sleep"/>
+                <YAxis label = "Mood"/>
+            </Histogram>
         </> 
     )
 }

@@ -5,12 +5,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
-/*TODO:
-    -axios request to get initial "best sleep"
-    -fill in URL for weekly stats to be set to 6 days ago
-    -general styling (esp mobile)
-    -If last night's entry is present, tell the user they already did that
-*/
+
 
 const HomeContainer = styled.div`
 
@@ -50,9 +45,13 @@ const mapStateToProps = state => {
     }
 }
 
+//This will show a simple home page 
 const Home = props => {
 
-    
+    const history = useHistory()
+
+
+    //Find out what the best number of hours to sleep is for display
     const sleepKeys = Object.keys(props.moodData)
     let maxScore = props.moodData[sleepKeys[0]]
     let maxKey = sleepKeys[0]
@@ -63,13 +62,9 @@ const Home = props => {
         }
     })
 
-    // console.log(maxScore, maxKey)
-
     
-
-    const history = useHistory()
-
-    const handleClick = event => {
+    //handles all nav button clicks with pushes
+    const handleButtonClick = event => {
         event.preventDefault()
         console.log(event.target.name)
         switch(event.target.name) {
@@ -84,52 +79,29 @@ const Home = props => {
         }
     }
 
-    const handleTemp = event => {
-        event.preventDefault();
-
-        
-        //test create
-        // axios.post(`https://sleeptrackerbackend.herokuapp.com/api/auth/register`,{username: "victoriat", password: "12345", first_name: "victoria", last_name: "topham", age: 26})
-        // .then(res => console.log(res))
-        // .catch(err => console.log(err))
-
-
-        // test login
-        // axios.post(`https://sleeptrackerbackend.herokuapp.com/api/auth/login`,{username: "CodyD", password: "12345"})
-        // .then(res => localStorage.setItem("token",res.data.token))
-        // .catch(err => console.log(err))
-
-        //test get user
-        // axiosWithAuth()
-        //     .get('/api/users')
-        //     .then(res => console.log(res))
-        //     .catch(err => console.log(err))
-
-        
-    }
+   
     
     return ( 
     <>
-    <h1>Welcome, user number {props.id}</h1>
-    <button onClick = {handleTemp}>Click me to log in</button>
-    <HomeContainer className = "home-container">
-        <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
-        
-        <button name = "dashboard" onClick = {handleClick} >
-            Learn more
-        </button>
- 
-    </HomeContainer>
-    <HomeContainer className = "home-container">
-        <h2>Check out your sleep stats</h2>
-        <button name = "stats" onClick = {handleClick}>
-            Go now
-        </button>
-    </HomeContainer>
-    <HomeContainer className = "home-container">
-        <h2>Create a new entry</h2>
-        <button name = "add" onClick = {handleClick}>Add last night's sleep</button>
-    </HomeContainer>
+        <h1>Welcome, user number {props.id}</h1>
+        <HomeContainer className = "home-container">
+            <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
+            
+            <button name = "dashboard" onClick = {handleButtonClick} >
+                Learn more
+            </button>
+    
+        </HomeContainer>
+        <HomeContainer className = "home-container">
+            <h2>Check out your sleep stats</h2>
+            <button name = "stats" onClick = {handleButtonClick}>
+                Go now
+            </button>
+        </HomeContainer>
+        <HomeContainer className = "home-container">
+            <h2>Create a new entry</h2>
+            <button name = "add" onClick = {handleButtonClick}>Add last night's sleep</button>
+        </HomeContainer>
     </> )
 
 }

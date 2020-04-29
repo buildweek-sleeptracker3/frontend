@@ -10,45 +10,50 @@ import HomeButton from '../buttons/HomeButton'
 const mapStateToProps = state => {
     return {
         data: state.data,
-        isEditing: state.booleans.showEditModal,
+        isEditing: state.booleans.isEditing,
         isDeleting: state.booleans.isDeleting,
         userId: state.userId
     }
 }
 
-//This page renders all of the data in 'data'. It is called weeklyview because eventually the api request will only get us one week of data at a time.
+//This page calls a card to render the info for each sleep entry belonging to the user
 const WeeklyView = props => {
 
     const history = useHistory()
 
+    //a function to refresh data
     const refreshData = _ => {
         props.fetchSleepData()
     }
 
-    const handleNew = event => {
+    //allows us to navigate to a new entry
+    const handleNewNav = event => {
         event.preventDefault()
         history.push('/new-entry')
     }
 
-    useEffect(_ => {
+    //whenever we edit, delete, or render the page for the first time, refresh the data
+    useEffect( _ => {
         refreshData() 
-    },[props.isEditing, props.isDeleting]) //we want this to refresh whenever the edit view is closed
+    },[props.isEditing, props.isDeleting]) 
     
+    //data initializes as null, so we'll wait until the API fetches new data to render
     if (!props.data) {return <h1>Loading...</h1>}
+    
     return ( 
-    <>
-        <h1>Your Nightly Rests</h1> 
-        <button onClick = {handleNew}>New Entry</button>
-        <HomeButton />
-       
-        {props.data.map(item => {
-            if(item.userId.toString() === props.userId) {
-                return <DayDisplayCard key = {item.id} sleepData = {item} refreshData = {refreshData}/>
-            }
-            
-            })}
+        <>
+            <h1>Your Nightly Rests</h1> 
+            <button onClick = {handleNewNav}>New Entry</button>
+            <HomeButton />
         
-    </>)
+            {props.data.map(item => {
+                if(item.userId.toString() === props.userId) {
+                    return <DayDisplayCard key = {item.id} sleepData = {item} refreshData = {refreshData}/>
+                }
+                
+                })}  
+        </>
+    )
 
 }
 
