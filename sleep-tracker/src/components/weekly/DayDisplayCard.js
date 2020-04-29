@@ -18,7 +18,6 @@ padding: 1% 2%;
 const mapStateToProps = state => {
     return {
         showEditModal: state.modals.showEditModal,
-        // username: state.user.userName,
 
         editID: state.editModal.id,
         editStart: state.editModal.start,

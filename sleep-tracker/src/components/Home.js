@@ -119,7 +119,7 @@ const Home = props => {
  
     </HomeContainer>
     <HomeContainer className = "home-container">
-        <h2>Check out your weekly stats</h2>
+        <h2>Check out your sleep stats</h2>
         <button name = "stats" onClick = {handleClick}>
             Go now
         </button>

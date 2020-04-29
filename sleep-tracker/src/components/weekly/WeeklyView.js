@@ -36,7 +36,7 @@ const WeeklyView = props => {
     if (!props.data) {return <h1>Loading...</h1>}
     return ( 
     <>
-        <h1>This is the weekly view page</h1> 
+        <h1>Your Nightly Rests</h1> 
         <button onClick = {handleNew}>New Entry</button>
         <HomeButton />
        
