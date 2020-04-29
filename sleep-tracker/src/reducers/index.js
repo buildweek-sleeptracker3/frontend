@@ -7,7 +7,7 @@ const defaultState = {
     userId: window.localStorage.getItem("userId"),
     data: null,
     sleepMood: dataSleepMood, //still waiting on an endpoint for this
-    modals: {
+    booleans: {
         showEditModal: false,
         isDeleting: false
     },
@@ -34,8 +34,8 @@ export const reducer = (state = defaultState, action) => {
         case SHOW_EDIT_MODAL: //set state to true and get ready
         return {
             ...state,
-            modals: {
-                ...state.modals,
+            booleans: {
+                ...state.booleans,
                 showEditModal: true
             },
             editModal: action.payload
@@ -43,8 +43,8 @@ export const reducer = (state = defaultState, action) => {
         case SUBMIT_EDIT_MODAL: //If we're submitting the edit modal then reset editing
             return {
                 ...state,
-                modals: {
-                    ...state.modals,
+                booleans: {
+                    ...state.booleans,
                     showEditModal: false
                 },
                 editModal: {
@@ -56,22 +56,22 @@ export const reducer = (state = defaultState, action) => {
                     userId: ""
                 }
             }
-        case CANCEL_EDIT:
-            return {
-                ...state,
-                modals: {
-                    ...state.modals,
-                    showEditModal: false
-                },
-                editModal: {
-                    hours: "",
-                    id: "",
-                    mood: "",
-                    sleep_end: "",
-                    sleep_start: "",
-                    userId: ""
-                }
-            }
+        // case CANCEL_EDIT:
+        //     return {
+        //         ...state,
+        //         booleans: {
+        //             ...state.booleans,
+        //             showEditModal: false
+        //         },
+        //         editModal: {
+        //             hours: "",
+        //             id: "",
+        //             mood: "",
+        //             sleep_end: "",
+        //             sleep_start: "",
+        //             userId: ""
+        //         }
+        //     }
         case FETCH_SLEEP_DATA:
             return{
                 ...state,
@@ -94,8 +94,8 @@ export const reducer = (state = defaultState, action) => {
         case DELETE_SLEEP_DATA:
             return {
                 ...state,
-                modals: {
-                    ...state.modals,
+                booleans: {
+                    ...state.booleans,
                     isDeleting: true
                 }
             }
@@ -103,8 +103,8 @@ export const reducer = (state = defaultState, action) => {
         case DONE_DELETING: 
             return {
                 ...state,
-                [state.modals]: {
-                    ...state.modals,
+                boolans: {
+                    ...state.booleans,
                     isDeleting: false
                 }
             }

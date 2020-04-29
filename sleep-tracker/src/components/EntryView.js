@@ -42,7 +42,7 @@ const mapStateToProps = state => {
         // sleep_end: state.editModal.sleep_end,
         // mood: state.editModal.mood,
         // userId: state.editModal.userId,
-        isEditing: state.modals.showEditModal,
+        isEditing: state.booleans.showEditModal,
         editObj: state.editModal,
         userId: state.userId
         

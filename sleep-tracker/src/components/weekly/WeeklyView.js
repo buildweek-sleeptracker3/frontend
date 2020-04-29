@@ -10,8 +10,8 @@ import HomeButton from '../buttons/HomeButton'
 const mapStateToProps = state => {
     return {
         data: state.data,
-        isEditing: state.modals.showEditModal,
-        isDeleting: state.modals.isDeleting,
+        isEditing: state.booleans.showEditModal,
+        isDeleting: state.booleans.isDeleting,
         userId: state.userId
     }
 }

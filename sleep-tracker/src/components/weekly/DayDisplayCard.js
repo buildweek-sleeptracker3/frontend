@@ -17,14 +17,14 @@ padding: 1% 2%;
 `
 const mapStateToProps = state => {
     return {
-        showEditModal: state.modals.showEditModal,
+        showEditModal: state.booleans.showEditModal,
 
         editID: state.editModal.id,
         editStart: state.editModal.start,
         editEnd: state.editModal.end,
         editMood: state.editModal.mood,
 
-        editing: state.modals.showEditModal
+        editing: state.booleans.showEditModal
 
     }
 }

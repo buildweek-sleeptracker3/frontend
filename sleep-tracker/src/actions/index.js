@@ -54,7 +54,8 @@ export const submitEditModal = data => dispatch => {
 }
 
 export const cancelEdit = data => dispatch => {
-    dispatch({type: CANCEL_EDIT})
+    //change isEditing to false, clear out state for edit data
+    dispatch({type: SUBMIT_EDIT_MODAL})
 }
 
 

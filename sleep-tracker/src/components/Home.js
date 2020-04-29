@@ -105,11 +105,7 @@ const Home = props => {
         //     .then(res => console.log(res))
         //     .catch(err => console.log(err))
 
-        //test get sleep by userid
-        axiosWithAuth()
-            .get(`/api/users/id/sleep/${props.id}`)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+        
     }
     
     return ( 
