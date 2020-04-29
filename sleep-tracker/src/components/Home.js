@@ -100,7 +100,7 @@ const Home = props => {
     
         </HomeContainer>
         <HomeContainer className = "home-container">
-            <h2>Check out your sleep stats</h2>
+            <h2>Check out past sleep entries</h2>
             <button name = "stats" onClick = {handleButtonClick}>
                 Go now
             </button>

@@ -62,6 +62,7 @@ const EntryView = props => {
     }
 
     const handleWake = event => {
+        console.log(event)
         setEntry({
             ...entry,
             sleep_end: event
@@ -121,12 +122,12 @@ const EntryView = props => {
         <form onSubmit = {handleSubmitForm}>
             <EntryContainer>
                 <p className = "entry-container">When did you go to sleep?</p>
-                <DateTimePicker value = {entry.sleep_start} onChange = {handleSleep}/>
+                <DateTimePicker value = {new Date(entry.sleep_start)} onChange = {handleSleep}/>
             </EntryContainer>
 
             <EntryContainer>
                 <p className = "entry-container">When did you wake up?</p>
-                <DateTimePicker value = {entry.sleep_end} onChange = {handleWake}/>
+                <DateTimePicker value = {new Date(entry.sleep_end)} onChange = {handleWake}/>
             </EntryContainer>
 
             <EntryContainer>

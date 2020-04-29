@@ -15,8 +15,8 @@ const defaultState = {
         hours: "",
         id: "",
         mood: "",
-        sleep_end: 0,
-        sleep_start: 0,
+        sleep_end: new Date(),
+        sleep_start: new Date(),
         userId: ""
     }
 }
@@ -51,8 +51,8 @@ export const reducer = (state = defaultState, action) => {
                     hours: "",
                     id: "",
                     mood: "",
-                    sleep_end: "",
-                    sleep_start: "",
+                    sleep_end: new Date(),
+                    sleep_start: new Date(),
                     userId: ""
                 }
             }
