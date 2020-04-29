@@ -17,57 +17,45 @@ padding: 1% 2%;
 `
 const mapStateToProps = state => {
     return {
-        showEditModal: state.modals.showEditModal,
-
         editID: state.editModal.id,
         editStart: state.editModal.start,
         editEnd: state.editModal.end,
         editMood: state.editModal.mood,
 
-        editing: state.modals.showEditModal
-
+        editing: state.booleans.isEditing
     }
 }
 
 //Each of these cards renders for every entry in state for data
 const DayDisplayCard = props => {
 
-    // const {id, start, end, mood} = props
     const data = props.sleepData
-    
 
-    //format the dates and calculate the hours slept so they can be displayed
+    //format some variables to display our sleep data
     const sleepDate = dateFormat(Date.parse(data.sleep_start), "dddd, mmmm dS")
     const sleepStart = dateFormat(Date.parse(data.sleep_start), "h:MM TT")
     const sleepEnd = dateFormat(Date.parse(data.sleep_end), "h:MM TT")
-    
-    const hoursSlept = (Math.round((Date.parse(data.sleep_end) - Date.parse(data.sleep_start)) / 360000) / 10)
-    
-    
 
     //when we want to edit, call the action to show the editing and pass it the right data to start off with
-    const handleEdit = event => {
+    const handleEditButton = event => {
         event.preventDefault()
         props.showEditModal(data)
-
-
     }
 
-    const handleDelete = event => {
+    //To delete data, call the action to delete and pass it the sleep object
+    const handleDeleteButton = event => {
         event.preventDefault()
         props.deleteSleepData(data)
-
-
-        
     }
 
+    //render a card that displays the data and some buttons to edit or delete the entry
     return(
         <DayCard>
             <p>{sleepDate}</p>
             <div className = "sleep-times">
                 <p>Asleep: {sleepStart} | Awake: {sleepEnd} | Asleep for {data.hours} hours. | Mood: {data.mood} </p>
-                <button onClick = {handleEdit}>Edit Entry</button>
-                <button onClick = {handleDelete}>Delete Entry</button>
+                <button onClick = {handleEditButton}>Edit Entry</button>
+                <button onClick = {handleDeleteButton}>Delete Entry</button>
             </div>
             {props.editing && props.editID === data.id ? <EntryView /> : null}
 

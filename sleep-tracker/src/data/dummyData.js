@@ -1,3 +1,5 @@
+//This held dummy data but as of now the only export being used is sleepMood
+
 export const user = {
     firstName: "Victoria",
     lastName: "Topham",

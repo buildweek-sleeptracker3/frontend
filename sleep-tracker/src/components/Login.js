@@ -39,17 +39,6 @@ const blankForm ={
 }
 
 
-// const postUser = user => {
-//     axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/login', user)
-//     .then(res =>{
-//         localStorage.setItem("token",JSON.stringify(res.data.token))
-//         props.login(res.data.userId)
-//         console.log(res)
-//     })
-//     .catch(err =>{
-//       console.log(err)
-//     })
-// }
 
 const formSchema = yup.object().shape({
     
@@ -70,6 +59,7 @@ const Login = props => {
         .then(res =>{
             localStorage.setItem("token",JSON.stringify(res.data.token))
             props.login(res.data.userId)
+            console.log(res)
             history.push('/home')
             
         })

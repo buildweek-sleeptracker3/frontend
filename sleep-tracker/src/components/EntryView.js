@@ -36,24 +36,22 @@ const MoodPicker = styled.div`
 
 const mapStateToProps = state => {
     return {
-        // hours: state.editModal.hours,
-        // id: state.editModal.id,
-        // sleep_start: state.editModal.sleep_start,
-        // sleep_end: state.editModal.sleep_end,
-        // mood: state.editModal.mood,
-        // userId: state.editModal.userId,
-        isEditing: state.modals.showEditModal,
+        isEditing: state.booleans.isEditing,
         editObj: state.editModal,
         userId: state.userId
         
     }
 }
+
+//This will allow us to EITHER add a new piece of data, or edit an existing one, based on if "isEditing" is true.
 const EntryView = props => {
-    // console.log(props.editObj)
 
     const history = useHistory()
     //set up the initial state for the entry. If we're editing, there will be values for these props. If we're not editing, they will be blank and we can start with a clean slate.
     const [entry, setEntry] = useState(props.editObj)
+    
+    //These functions manage the form w/ state
+    //because of the calendars, we can't use a 'name' attribute to make the code more DRY.
     
     const handleSleep = event => {
         
@@ -78,43 +76,49 @@ const EntryView = props => {
         })
     }
 
-    const handleSubmit = event => {
+    //Handle the submission of the form
+    const handleSubmitForm = event => {
         event.preventDefault()
         //If we are editing, send a requst to update the edited information
-
+        //calculate the hours slept so we can use it again (TODO: make this more clean)
         const hoursSlept = (Math.round((Date.parse(entry.sleep_end) - Date.parse(entry.sleep_start)) / 360000) / 10)
-        //TODOL add this to state
-        console.log(hoursSlept)
+        
         setEntry({
             ...entry,
             hours: hoursSlept
         })
+
         if (props.isEditing) {
+            //if we're editing, we'll use the appropriate action
             props.submitEditModal(entry)
 
         } else {
-        //If we are adding a new entry, send a post request to do that entry and set the state to not editing anymore.
-            //TODO: calculate the hours, dynamic userID
+            // If we are adding a new entry, send a post request to do that entry and set the state to not editing anymore.
+            
             props.addSleepData({userId: props.userId, sleep_start: entry.sleep_start, sleep_end: entry.sleep_end, hours: hoursSlept, mood: entry.mood})
-            history.push("/weekly-view/date")
+            //redirect to view all data
+            history.push("/view-sleep-data") 
         }
     }
 
+    //Handle the button that navigates back to all entries
     const handleNavToEntries = event => {
         event.preventDefault();
-        history.push("/weekly-view/date")
+        history.push("/view-sleep-data")
     }
 
+    //If the user wants to cancel their edit without saving changes, call the appropriate action
     const handleCancelEdit = event => {
         event.preventDefault();
         props.cancelEdit();
     }
     
+    //display a form with the appropriate buttons
     return(
         <>
         <h1>New Entry</h1>
-        {props.isEditing? null : <HomeButton />}
-        <form onSubmit = {handleSubmit}>
+        {props.isEditing? null : <HomeButton />} {/* if we're not editing then show a home button */}
+        <form onSubmit = {handleSubmitForm}>
             <EntryContainer>
                 <p className = "entry-container">When did you go to sleep?</p>
                 <DateTimePicker value = {entry.sleep_start} onChange = {handleSleep}/>
@@ -135,8 +139,9 @@ const EntryView = props => {
                 </MoodPicker>
             </EntryContainer>
             <button>{props.isEditing ? "Update" : "Submit Entry"}</button>
-            {props.isEditing? <button onClick = {handleCancelEdit}>Cancel Edit</button> : null}
-            {props.isEditing? null : <button onClick = {handleNavToEntries}>Back To All Entries</button>}
+            {/* If we're editing, show a cancel edit button. If we're not editing, show a nav to entries button. */}
+            {props.isEditing? <button onClick = {handleCancelEdit}>Cancel Edit</button> : <button onClick = {handleNavToEntries}>Back To All Entries</button>}
+            
         </form>
         </>
     )

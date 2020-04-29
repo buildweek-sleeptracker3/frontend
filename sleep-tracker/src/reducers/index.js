@@ -1,14 +1,13 @@
 import {sleepMood as dataSleepMood} from '../data/dummyData'
 
-import { LOGIN, SHOW_EDIT_MODAL, SUBMIT_EDIT_MODAL, FETCH_SLEEP_DATA, UPDATE_EDIT, CANCEL_EDIT, DELETE_SLEEP_DATA, DONE_DELETING  } from '../actions/index'
+import { LOGIN, SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL, UPDATE_SLEEP_DATA, UPDATE_EDIT, CANCEL_EDIT, DELETE_SLEEP_DATA, DONE_DELETING  } from '../actions/index'
 
 const defaultState = {
-    // user: dataUser,
     userId: window.localStorage.getItem("userId"),
     data: null,
     sleepMood: dataSleepMood, //still waiting on an endpoint for this
-    modals: {
-        showEditModal: false,
+    booleans: {
+        isEditing: false,
         isDeleting: false
     },
     editModal: {
@@ -25,27 +24,27 @@ export const reducer = (state = defaultState, action) => {
 
     switch(action.type) {
         
-        case LOGIN: 
-        console.log("you have reached the reducer", action.payload)
+        case LOGIN: //update the id upon logging in
         return {
             ...state,
             userId: action.payload
         }
+
         case SHOW_EDIT_MODAL: //set state to true and get ready
         return {
             ...state,
-            modals: {
-                ...state.modals,
-                showEditModal: true
+            booleans: {
+                ...state.booleans,
+                isEditing: true
             },
             editModal: action.payload
         }
-        case SUBMIT_EDIT_MODAL: //If we're submitting the edit modal then reset editing
+        case CLOSE_EDIT_MODAL: //update state to close modal and clear edit state
             return {
                 ...state,
-                modals: {
-                    ...state.modals,
-                    showEditModal: false
+                booleans: {
+                    ...state.booleans,
+                    isEditing: false
                 },
                 editModal: {
                     hours: "",
@@ -56,28 +55,14 @@ export const reducer = (state = defaultState, action) => {
                     userId: ""
                 }
             }
-        case CANCEL_EDIT:
-            return {
-                ...state,
-                modals: {
-                    ...state.modals,
-                    showEditModal: false
-                },
-                editModal: {
-                    hours: "",
-                    id: "",
-                    mood: "",
-                    sleep_end: "",
-                    sleep_start: "",
-                    userId: ""
-                }
-            }
-        case FETCH_SLEEP_DATA:
+
+        case UPDATE_SLEEP_DATA: //once we've fetched data, update in state
             return{
                 ...state,
                 data: action.payload
             }
-        case UPDATE_EDIT: 
+
+        case UPDATE_EDIT: //update state based on our edit
             let index = ""
         //find the index of where the object with the id i'm editing is 
             state.data.map((datum, i) => {
@@ -85,29 +70,32 @@ export const reducer = (state = defaultState, action) => {
                     index = i
                 }
             })
-            console.log("index:", index)
             return {
                 ...state,
                 [state.data[index]]: action.payload
 
             }
-        case DELETE_SLEEP_DATA:
+
+        case DELETE_SLEEP_DATA: //update state to deleting so that we can trigger our useeffect
+        
             return {
                 ...state,
-                modals: {
-                    ...state.modals,
+                booleans: {
+                    ...state.booleans,
                     isDeleting: true
                 }
             }
 
-        case DONE_DELETING: 
+        case DONE_DELETING: //done deleting, update appropriately
+           
             return {
                 ...state,
-                [state.modals]: {
-                    ...state.modals,
+                boolans: {
+                    ...state.booleans,
                     isDeleting: false
                 }
             }
+
         default: return state
     }
 }
