@@ -11,7 +11,8 @@ const mapStateToProps = state => {
     return {
         data: state.data,
         isEditing: state.modals.showEditModal,
-        isDeleting: state.modals.isDeleting
+        isDeleting: state.modals.isDeleting,
+        userId: state.userId
     }
 }
 
@@ -41,9 +42,11 @@ const WeeklyView = props => {
         <HomeButton />
        
         {props.data.map(item => {
-            // console.log(item)
-            return <DayDisplayCard key = {item.id} sleepData = {item} refreshData = {refreshData}/>
-        })}
+            if(item.userId.toString() === props.userId) {
+                return <DayDisplayCard key = {item.id} sleepData = {item} refreshData = {refreshData}/>
+            }
+            
+            })}
         
     </>)
 
