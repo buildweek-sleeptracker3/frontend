@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute'
 
 import Home from './components/Home.js';
@@ -12,7 +12,11 @@ import EntryView from './components/EntryView.js';
 import LogoutButton from './components/buttons/LogoutButton'
 
 
-function App() {
+
+
+function App(props) {
+
+  
   return (
     <div>
       <LogoutButton />
@@ -29,15 +33,10 @@ function App() {
         <PrivateRoute path='/dashboard' component = {Dashboard}/>
 
         <PrivateRoute path='/view-sleep-data' component = {SleepView}/>
-        
-        {/* <PrivateRoute path ='/entry/:date' component = {EntryView}/> */}
-        
 
         <PrivateRoute path='/new-entry' component = {EntryView}/>
-        
 
         <PrivateRoute path='/' component = {Home}/>
-        
 
       </Switch>
     </div>

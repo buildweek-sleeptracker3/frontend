@@ -1,6 +1,6 @@
 import {sleepMood as dataSleepMood} from '../data/dummyData'
 
-import { LOGIN, SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL, UPDATE_SLEEP_DATA, UPDATE_EDIT, CANCEL_EDIT, DELETE_SLEEP_DATA, DONE_DELETING  } from '../actions/index'
+import { LOGIN, SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL, ADD_SLEEP_DATA, DONE_ADDING_DATA, UPDATE_SLEEP_DATA, UPDATE_EDIT, CANCEL_EDIT, DELETE_SLEEP_DATA, DONE_DELETING  } from '../actions/index'
 
 const defaultState = {
     userId: window.localStorage.getItem("userId"),
@@ -8,7 +8,8 @@ const defaultState = {
     sleepMood: dataSleepMood, //still waiting on an endpoint for this
     booleans: {
         isEditing: false,
-        isDeleting: false
+        isDeleting: false,
+        isAdding: false
     },
     editModal: {
         hours: "",
@@ -90,11 +91,31 @@ export const reducer = (state = defaultState, action) => {
            
             return {
                 ...state,
-                boolans: {
+                booleans: {
                     ...state.booleans,
                     isDeleting: false
                 }
             }
+
+        case ADD_SLEEP_DATA: 
+
+            return {
+                ...state,
+                booleans: {
+                    ...state.booleans,
+                    isAdding: true
+                }
+            }
+
+        case DONE_ADDING_DATA: 
+
+        return {
+            ...state,
+            booleans: {
+                ...state.booleans,
+                isAdding: false
+            }
+        }
 
         default: return state
     }
