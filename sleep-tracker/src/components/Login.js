@@ -41,7 +41,7 @@ const postUser = user => {
     axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/login', user)
     .then(res =>{
         localStorage.setItem("token",JSON.stringify(res.data.token))
-        console.log(res.data.token)
+        console.log(res)
     })
     .catch(err =>{
       console.log(err)
