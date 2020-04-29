@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {useHistory} from 'react-router-dom';
+import {Route, useHistory} from 'react-router-dom';
 import * as yup from 'yup'
+import SignupConfirm from './SignupConfirm';
 
 
 const SignupStyle = styled.div`
@@ -10,23 +11,40 @@ const SignupStyle = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 375px;
+    width: 100vw;
+    height:100vh;
     padding: 5px;
+    background-color: #121212;
+
+    h1{
+        color: #E5EFF2;
+    }
 
     form {
+            label{
+                color: #A7A7A7;
+            }
 
             input{
                 width: 100%;
                 height: 30px;
+                padding: 3%;
+                font-size: 1.1rem;
+                border: none;
                 border-radius: 5px 5px 0 0; 
                 box-sizing: border-box;
+                background-color: #232323;
+                color: #E4E4E4;
 
             }
 
             .submit-btn{
                 width: 100%;
-                height: 30px;
+                height: 35px;
                 border-radius: 10px;
+                background-color: #39859D;
+                color: #E5EFF2;
+                font-size:1.2rem;
             }
     }
 `
@@ -69,8 +87,7 @@ const formSchema = yup.object().shape({
   
     email: yup
       .string()
-      .email('Must Use a VALID Email Address')
-      .required('Email Address is Required!'),
+      .email('Must Use a VALID Email Address'),
 
     username: yup
         .string()
@@ -114,18 +131,35 @@ const Signup = _ => {
 
     const onSubmit = evt => {
         evt.preventDefault()
+
+        const name = evt.target.name
+        const value = evt.target.value
+
+        yup
+          .reach(formSchema, name)
+          .validate(value)
+          .then(valid =>{
+            setFormErrors(
+              {...formErrors,
+              [name]:''})
+          })
+          .catch(err =>{
+            setFormErrors(
+              {...formErrors, 
+              [name]: err.errors[0]})
+          })
     
-        const newUser = {
-            first_name: formValues.first_name,
-            last_name: formValues.last_name,
-            age:formValues.age,
-            email: formValues.email,
-            username: formValues.username,
-            password: formValues.password,
-        }
+        // const newUser = {
+        //     first_name: formValues.first_name,
+        //     last_name: formValues.last_name,
+        //     age:formValues.age,
+        //     email: formValues.email,
+        //     username: formValues.username,
+        //     password: formValues.password,
+        // }
         
-        postUser(newUser)
-        history.push('/login')
+        // postUser(newUser)
+        history.push('/signup-confirm')
     }
 
     return(
@@ -218,7 +252,9 @@ const Signup = _ => {
                     type='submit'
                     value='Submit' />
             </form>
-
+            <Route path='/signup-confirm'>  
+                <SignupConfirm data={formValues} />
+            </Route>  
         </SignupStyle>
     )
 }
