@@ -96,13 +96,13 @@ const EntryView = props => {
         //If we are adding a new entry, send a post request to do that entry and set the state to not editing anymore.
             //TODO: calculate the hours, dynamic userID
             props.addSleepData({userId: props.userId, sleep_start: entry.sleep_start, sleep_end: entry.sleep_end, hours: hoursSlept, mood: entry.mood})
-            history.push("/weekly-view/date")
+            history.push("/view-sleep-data")
         }
     }
 
     const handleNavToEntries = event => {
         event.preventDefault();
-        history.push("/weekly-view/date")
+        history.push("/view-sleep-data")
     }
 
     const handleCancelEdit = event => {

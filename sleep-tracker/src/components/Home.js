@@ -76,9 +76,9 @@ const Home = props => {
             case "dashboard": 
                 return history.push("/dashboard")
             case "stats":
-                return history.push("/weekly-view/date") //this should reflect a week from today
+                return history.push("/view-sleep-data") //this should reflect a week from today
             case "add":
-                return history.push("/entry/new-entry")
+                return history.push("/new-entry")
             default: 
                 return null
         }

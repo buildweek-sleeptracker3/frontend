@@ -27,7 +27,7 @@ const WeeklyView = props => {
 
     const handleNew = event => {
         event.preventDefault()
-        history.push("/entry/new-entry")
+        history.push('/new-entry')
     }
 
     useEffect(_ => {

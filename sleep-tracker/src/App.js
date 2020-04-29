@@ -8,7 +8,8 @@ import Login from './components/Login.js';
 import Signup from './components/Signup.js';
 import Dashboard from './components/Dashboard.js';
 import OptimalSleep from './components/OptimalSleep';
-import WeeklyView from './components/weekly/WeeklyView.js';
+// import WeeklyView from './components/sleepdata/WeeklyView.js';
+import SleepView from './components/sleepdata/SleepView.js'
 import EntryView from './components/EntryView.js';
 
 /*
@@ -41,12 +42,12 @@ function App() {
 
         <PrivateRoute path='/dashboard' component = {Dashboard}/>
 
-        <PrivateRoute path='/weekly-view/:date' component = {WeeklyView}/>
+        <PrivateRoute path='/view-sleep-data' component = {SleepView}/>
         
-        <PrivateRoute path ='/entry/:date' component = {EntryView}/>
+        {/* <PrivateRoute path ='/entry/:date' component = {EntryView}/> */}
         
 
-        <PrivateRoute path='/entry' component = {EntryView}/>
+        <PrivateRoute path='/new-entry' component = {EntryView}/>
         
 
         <PrivateRoute path='/' component = {Home}/>
