@@ -4,7 +4,8 @@ import DateTimePicker from 'react-datetime-picker'
 import { useHistory } from 'react-router-dom'
 
 import { connect } from 'react-redux'
-import { submitEditModal, addSleepData } from '../actions/index.js'
+import { submitEditModal, addSleepData, cancelEdit } from '../actions/index.js'
+import HomeButton from './buttons/HomeButton'
 
 
 const EntryContainer = styled.div`
@@ -97,10 +98,21 @@ const EntryView = props => {
             history.push("/weekly-view/date")
         }
     }
+
+    const handleNavToEntries = event => {
+        event.preventDefault();
+        history.push("/weekly-view/date")
+    }
+
+    const handleCancelEdit = event => {
+        event.preventDefault();
+        props.cancelEdit();
+    }
     
     return(
         <>
         <h1>New Entry</h1>
+        {props.isEditing? null : <HomeButton />}
         <form onSubmit = {handleSubmit}>
             <EntryContainer>
                 <p className = "entry-container">When did you go to sleep?</p>
@@ -122,6 +134,8 @@ const EntryView = props => {
                 </MoodPicker>
             </EntryContainer>
             <button>{props.isEditing ? "Update" : "Submit Entry"}</button>
+            {props.isEditing? <button onClick = {handleCancelEdit}>Cancel Edit</button> : null}
+            {props.isEditing? null : <button onClick = {handleNavToEntries}>Back To All Entries</button>}
         </form>
         </>
     )
@@ -131,4 +145,4 @@ const EntryView = props => {
 
 
 
-export default connect(mapStateToProps, {submitEditModal, addSleepData})(EntryView)
+export default connect(mapStateToProps, {submitEditModal, addSleepData, cancelEdit})(EntryView)

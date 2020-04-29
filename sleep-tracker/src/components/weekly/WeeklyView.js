@@ -4,6 +4,8 @@ import DayDisplayCard from './DayDisplayCard'
 import { fetchSleepData } from '../../actions/index'
 import { useHistory } from 'react-router-dom'
 
+import HomeButton from '../buttons/HomeButton'
+
 
 const mapStateToProps = state => {
     return {
@@ -35,6 +37,7 @@ const WeeklyView = props => {
     <>
         <h1>This is the weekly view page</h1> 
         <button onClick = {handleNew}>New Entry</button>
+        <HomeButton />
        
         {props.data.map(item => {
             // console.log(item)

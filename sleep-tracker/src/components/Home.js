@@ -74,8 +74,8 @@ const Home = props => {
         event.preventDefault()
         console.log(event.target.name)
         switch(event.target.name) {
-            case "optimal": 
-                return history.push("/optimal-sleep")
+            case "dashboard": 
+                return history.push("/dashboard")
             case "stats":
                 return history.push("/weekly-view/date") //this should reflect a week from today
             case "add":
@@ -114,7 +114,7 @@ const Home = props => {
     <HomeContainer className = "home-container">
         <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
         
-        <button name = "optimal" onClick = {handleClick} >
+        <button name = "dashboard" onClick = {handleClick} >
             Learn more
         </button>
  
