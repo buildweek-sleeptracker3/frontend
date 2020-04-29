@@ -9,25 +9,13 @@ import Signup from './components/Signup.js';
 import Dashboard from './components/Dashboard.js';
 import SleepView from './components/sleepdata/SleepView.js'
 import EntryView from './components/EntryView.js';
+import LogoutButton from './components/buttons/LogoutButton'
 
-/*
-TODO: Import and route components:
-  √  "/"           --> Home.js (exact!)
-  √  "/login"      --> Login.js
-  √  "/signup"    --> Signup.js
-  √  "/dashboard"  --> Dashboard.js
-  √  "/optimal-sleep" --> OptimalSleep.js
-  √  "/weekly-view:start-date" --> WeeklyView.js
-  √  "/entry"      --> EntryView.js (exact!)
-  √  "/entry:date" --> EntryView.js 
-
-    ***Components are already set up so they can be imported.
-
-*/
 
 function App() {
   return (
     <div>
+      <LogoutButton />
       <Switch>
 
         <Route path='/login'>
