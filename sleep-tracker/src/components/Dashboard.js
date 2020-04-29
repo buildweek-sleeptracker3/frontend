@@ -23,7 +23,7 @@ const Dashboard = props => {
     },[])
 
     const aggregatedMood = formatData(props.rawData)
-    console.log(aggregatedMood)
+    
 
     
 
@@ -37,15 +37,36 @@ const Dashboard = props => {
             count: props.moodData[key]
         }
     })
-    
+
+
+    let maxKey = ""
+    //calculate when you're at your best
+    if(aggregatedMood) {
+        const sleepKeys = Object.keys(aggregatedMood.formatted)
+        let maxScore = aggregatedMood.formatted[sleepKeys[0]]
+        maxKey = sleepKeys[0]
+        sleepKeys.map(key => {
+            if (aggregatedMood.formatted[key] > maxScore) {
+                maxScore = aggregatedMood.formatted[key]
+                maxKey = key
+            }
+        })
+
+        console.log(maxScore, maxKey)
+    }
+
+
+
     //display a graph of the sleep data vs. mood
     if (!aggregatedMood) {return null}
 
     return ( 
         <>
             <h1>Your Sleep Mood</h1>
+            <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
+
             <HomeButton />
-            <Histogram width = "500" height = "500" binType = "categorical">
+            <Histogram width = "700" height = "500" binType = "categorical">
                 <BarSeries binnedData = {aggregatedMood.binned}/>
                 <XAxis label = "Hours of sleep"/>
                 <YAxis label = "Mood"/>

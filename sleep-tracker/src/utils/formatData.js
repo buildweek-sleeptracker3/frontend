@@ -3,7 +3,6 @@
 export const formatData = rawData => {
     if (!rawData) {return null} //if the data isn't here yet then don't bother
 
-    console.log(rawData)
     const format = { //start with just format of what we want
         "0 - 5": [],
         "5 - 5.5": [],
@@ -80,7 +79,7 @@ export const formatData = rawData => {
         }
     })
 
-    
+    console.log(format)
 
     return {binned: binnedData, formatted: format} //this is now formatted and ready to go!
 
