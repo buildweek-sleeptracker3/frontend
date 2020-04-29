@@ -33,6 +33,7 @@ const WeeklyView = props => {
         refreshData() 
     },[props.isEditing, props.isDeleting]) //we want this to refresh whenever the edit view is closed
     
+    if (!props.data) {return <h1>Loading...</h1>}
     return ( 
     <>
         <h1>This is the weekly view page</h1> 

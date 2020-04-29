@@ -45,7 +45,6 @@ const HomeContainer = styled.div`
 `
 const mapStateToProps = state => {
     return {
-        name: state.user.firstName,
         moodData: state.sleepMood,
         id: state.userId
     }
@@ -109,7 +108,7 @@ const Home = props => {
     
     return ( 
     <>
-    <h1>Welcome back, {props.name}, user number {props.id}</h1>
+    <h1>Welcome, user number {props.id}</h1>
     {/* <button onClick = {handleTemp}>Click me to log in</button> */}
     <HomeContainer className = "home-container">
         <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
