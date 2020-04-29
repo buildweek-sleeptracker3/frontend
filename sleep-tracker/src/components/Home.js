@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { fetchSleepData } from '../actions/index'
+import { formatData } from '../utils/formatData'
 
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -50,23 +52,26 @@ const Home = props => {
 
     const history = useHistory()
 
+    
+
+
+
 
     //Find out what the best number of hours to sleep is for display
-    const sleepKeys = Object.keys(props.moodData)
-    let maxScore = props.moodData[sleepKeys[0]]
-    let maxKey = sleepKeys[0]
-    sleepKeys.map(key => {
-        if (props.moodData[key] > maxScore) {
-            maxScore = props.moodData[key]
-            maxKey = key
-        }
-    })
+    // const sleepKeys = Object.keys(props.moodData)
+    // let maxScore = props.moodData[sleepKeys[0]]
+    // let maxKey = sleepKeys[0]
+    // sleepKeys.map(key => {
+    //     if (props.moodData[key] > maxScore) {
+    //         maxScore = props.moodData[key]
+    //         maxKey = key
+    //     }
+    // })
 
     
     //handles all nav button clicks with pushes
     const handleButtonClick = event => {
         event.preventDefault()
-        console.log(event.target.name)
         switch(event.target.name) {
             case "dashboard": 
                 return history.push("/dashboard")
@@ -79,13 +84,15 @@ const Home = props => {
         }
     }
 
+    
+
    
     
     return ( 
     <>
         <h1>Welcome, user number {props.id}</h1>
         <HomeContainer className = "home-container">
-            <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
+            <h2> Find out how much sleep is right for you!</h2>
             
             <button name = "dashboard" onClick = {handleButtonClick} >
                 Learn more
@@ -93,7 +100,7 @@ const Home = props => {
     
         </HomeContainer>
         <HomeContainer className = "home-container">
-            <h2>Check out your sleep stats</h2>
+            <h2>Check out past sleep entries</h2>
             <button name = "stats" onClick = {handleButtonClick}>
                 Go now
             </button>
@@ -106,4 +113,4 @@ const Home = props => {
 
 }
 
-export default connect(mapStateToProps, {})(Home);
+export default connect(mapStateToProps, {fetchSleepData})(Home);

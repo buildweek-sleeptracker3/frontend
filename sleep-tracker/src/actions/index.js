@@ -8,6 +8,7 @@ export const CLOSE_EDIT_MODAL = 'HIDE_EDIT_MODAL'
 export const UPDATE_EDIT = 'UPDATE_EDIT'
 export const UPDATE_SLEEP_DATA = 'UPDATE_SLEEP_DATA'
 export const ADD_SLEEP_DATA = 'ADD_SLEEP_DATA'
+export const DONE_ADDING_DATA = 'DONE_ADDING_DATA'
 export const DELETE_SLEEP_DATA = 'DELETE_SLEEP_DATA'
 export const DONE_DELETING = 'DONT_DELETING'
 
@@ -57,11 +58,13 @@ export const fetchSleepData = _ => dispatch => {
 
 export const addSleepData = data => dispatch => {
     //post a new piece of sleep data. The response is just a success message, so we can't use it to update our data because we don't have the id of the entry added. Instead we'll just rerender the whole page anyways when we navigate, triggering a fetch.
-
+    dispatch({type: ADD_SLEEP_DATA})
     axiosWithAuth()
+        
         .post('/api/users/sleep',data)
         .then(res => {
             console.log(res)
+            dispatch({type: DONE_ADDING_DATA})
         })
         .catch(err => console.log(err))
 }

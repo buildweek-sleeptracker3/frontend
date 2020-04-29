@@ -12,12 +12,13 @@ const mapStateToProps = state => {
         data: state.data,
         isEditing: state.booleans.isEditing,
         isDeleting: state.booleans.isDeleting,
+        isAdding: state.booleans.isAdding,
         userId: state.userId
     }
 }
 
 //This page calls a card to render the info for each sleep entry belonging to the user
-const WeeklyView = props => {
+const SleepView = props => {
 
     const history = useHistory()
 
@@ -35,7 +36,7 @@ const WeeklyView = props => {
     //whenever we edit, delete, or render the page for the first time, refresh the data
     useEffect( _ => {
         refreshData() 
-    },[props.isEditing, props.isDeleting]) 
+    },[props.isEditing, props.isDeleting, props.isAdding]) 
     
     //data initializes as null, so we'll wait until the API fetches new data to render
     if (!props.data) {return <h1>Loading...</h1>}
@@ -58,4 +59,4 @@ const WeeklyView = props => {
 }
 
 
-export default connect(mapStateToProps, {fetchSleepData})(WeeklyView)
+export default connect(mapStateToProps, {fetchSleepData})(SleepView)
