@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import DayDisplayCard from './DayDisplayCard'
+import { fetchSleepData } from '../../actions/index'
 
 
 const mapStateToProps = state => {
@@ -11,7 +12,13 @@ const mapStateToProps = state => {
 
 //This page renders all of the data in 'data'. It is called weeklyview because eventually the api request will only get us one week of data at a time.
 const WeeklyView = props => {
-    
+    const refreshData = _ => {
+        props.fetchSleepData()
+    }
+
+    useEffect(_ => {
+        refreshData() 
+    },[])
     //TODO: add a button to request data from a new week
     return ( 
     <>
@@ -25,4 +32,4 @@ const WeeklyView = props => {
 }
 
 
-export default connect(mapStateToProps, {})(WeeklyView)
+export default connect(mapStateToProps, {fetchSleepData})(WeeklyView)

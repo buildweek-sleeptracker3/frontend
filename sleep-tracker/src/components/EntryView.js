@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import DateTimePicker from 'react-datetime-picker'
 
 import { connect } from 'react-redux'
-import { submitEditModal } from '../actions/index'
+import { submitEditModal, addSleepData } from '../actions/index.js'
 
 
 const EntryContainer = styled.div`
@@ -82,8 +82,8 @@ const EntryView = props => {
 
         } else {
         //If we are adding a new entry, send a post request to do that entry and set the state to not editing anymore.
-
-
+            //TODO: calculate the hours, dynamic userID
+            props.addSleepData({userID: 8, sleep_start: entry.sleep, sleep_end: entry.wake, hours: 0, mood: entry.mood})
         }
     }
 
@@ -120,4 +120,4 @@ const EntryView = props => {
 
 
 
-export default connect(mapStateToProps, {submitEditModal})(EntryView)
+export default connect(mapStateToProps, {submitEditModal, addSleepData})(EntryView)

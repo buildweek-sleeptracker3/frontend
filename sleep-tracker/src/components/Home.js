@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { connect } from 'react-redux'
 import axios from 'axios'
-
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 /*TODO:
     -axios request to get initial "best sleep"
     -fill in URL for weekly stats to be set to 6 days ago
@@ -98,6 +98,12 @@ const Home = props => {
         // axios.post(`https://sleeptrackerbackend.herokuapp.com/api/auth/login`,{username: "CodyD", password: "12345"})
         // .then(res => localStorage.setItem("token",res.data.token))
         // .catch(err => console.log(err))
+
+        //test get user
+        // axiosWithAuth()
+        //     .get('/api/users')
+        //     .then(res => console.log(res))
+        //     .catch(err => console.log(err))
     }
     
     return ( 
