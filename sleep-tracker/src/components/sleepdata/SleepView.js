@@ -18,7 +18,7 @@ const mapStateToProps = state => {
 }
 
 //This page calls a card to render the info for each sleep entry belonging to the user
-const WeeklyView = props => {
+const SleepView = props => {
 
     const history = useHistory()
 
@@ -59,4 +59,4 @@ const WeeklyView = props => {
 }
 
 
-export default connect(mapStateToProps, {fetchSleepData})(WeeklyView)
+export default connect(mapStateToProps, {fetchSleepData})(SleepView)
