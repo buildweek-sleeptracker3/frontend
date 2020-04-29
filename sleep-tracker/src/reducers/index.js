@@ -10,10 +10,12 @@ const defaultState = {
         showEditModal: false
     },
     editModal: {
+        hours: "",
         id: "",
-        start: "",
-        end: "",
-        mood: ""
+        mood: "",
+        sleep_end: "",
+        sleep_start: "",
+        userId: ""
     }
 }
 
@@ -37,10 +39,12 @@ export const reducer = (state = defaultState, action) => {
                     showEditModal: false
                 },
                 editModal: {
+                    hours: "",
                     id: "",
-                    start: "",
-                    end: "",
-                    mood: ""
+                    mood: "",
+                    sleep_end: "",
+                    sleep_start: "",
+                    userId: ""
                 }
             }
         case FETCH_SLEEP_DATA:

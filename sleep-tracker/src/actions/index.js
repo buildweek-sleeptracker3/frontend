@@ -50,6 +50,7 @@ export const addSleepData = data => dispatch => {
         .post('/api/users/sleep',data)
         .then(res => {
             console.log(res)
+            dispatch({type: FETCH_SLEEP_DATA, payload: res.data})
         })
         .catch(err => console.log(err))
 }

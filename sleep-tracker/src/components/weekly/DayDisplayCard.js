@@ -33,25 +33,23 @@ const mapStateToProps = state => {
 //Each of these cards renders for every entry in state for data
 const DayDisplayCard = props => {
 
-    const {id, start, end, mood} = props
+    // const {id, start, end, mood} = props
+    const data = props.sleepData
+    
 
     //format the dates and calculate the hours slept so they can be displayed
-    const sleepDate = dateFormat(Date.parse(start), "dddd, mmmm dS")
-    const sleepStart = dateFormat(Date.parse(start), "h:MM TT")
-    const sleepEnd = dateFormat(Date.parse(end), "h:MM TT")
-    const hoursSlept = (Math.round((Date.parse(end) - Date.parse(start)) / 360000) / 10)
+    const sleepDate = dateFormat(Date.parse(data.sleep_start), "dddd, mmmm dS")
+    const sleepStart = dateFormat(Date.parse(data.sleep_start), "h:MM TT")
+    const sleepEnd = dateFormat(Date.parse(data.sleep_end), "h:MM TT")
+    
+    const hoursSlept = (Math.round((Date.parse(data.sleep_end) - Date.parse(data.sleep_start)) / 360000) / 10)
     
     
 
     //when we want to edit, call the action to show the editing and pass it the right data to start off with
     const handleEdit = event => {
         event.preventDefault()
-        props.showEditModal({
-            id: id,
-            start: start,
-            end: end,
-            mood: mood
-        })
+        props.showEditModal(data)
 
 
     }
@@ -62,7 +60,7 @@ const DayDisplayCard = props => {
                 <p>Asleep: {sleepStart} | Awake: {sleepEnd} | Hours Slept: {hoursSlept}</p>
                 <button onClick = {handleEdit}>Edit Entry</button>
             </div>
-            {props.editing && props.editID === id ? <EntryView /> : null}
+            {props.editing && props.editID === data.id ? <EntryView /> : null}
 
         </DayCard>
     )

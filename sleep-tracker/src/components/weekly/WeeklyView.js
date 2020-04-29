@@ -23,8 +23,10 @@ const WeeklyView = props => {
     return ( 
     <>
         <h1>This is the weekly view page</h1> 
+       
         {props.data.map(item => {
-            return <DayDisplayCard key = {item.id} id = {item.id} start = {item.start} end = {item.end} mood = {item.mood}/>
+            // console.log(item)
+            return <DayDisplayCard key = {item.id} sleepData = {item}/>
         })}
         
     </>)

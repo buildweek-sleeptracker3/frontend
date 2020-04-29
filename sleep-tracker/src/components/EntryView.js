@@ -34,22 +34,22 @@ const MoodPicker = styled.div`
 
 const mapStateToProps = state => {
     return {
-        id: state.editModal.id,
-        sleep: state.editModal.start,
-        wake: state.editModal.end,
-        mood: state.editModal.mood,
-        isEditing: state.modals.showEditModal
+        // hours: state.editModal.hours,
+        // id: state.editModal.id,
+        // sleep_start: state.editModal.sleep_start,
+        // sleep_end: state.editModal.sleep_end,
+        // mood: state.editModal.mood,
+        // userId: state.editModal.userId,
+        isEditing: state.modals.showEditModal,
+        editObj: state.editModal
+        
     }
 }
 const EntryView = props => {
+    // console.log(props.editObj)
 
     //set up the initial state for the entry. If we're editing, there will be values for these props. If we're not editing, they will be blank and we can start with a clean slate.
-    const [entry, setEntry] = useState({
-        id: props.id,
-        sleep: props.sleep,
-        wake: props.wake,
-        mood: props.mood
-    })
+    const [entry, setEntry] = useState(props.editObj)
     
     const handleSleep = event => {
         
@@ -93,12 +93,12 @@ const EntryView = props => {
         <form onSubmit = {handleSubmit}>
             <EntryContainer>
                 <p className = "entry-container">When did you go to sleep?</p>
-                <DateTimePicker value = {entry.sleep} onChange = {handleSleep}/>
+                <DateTimePicker value = {entry.sleep_start} onChange = {handleSleep}/>
             </EntryContainer>
 
             <EntryContainer>
                 <p className = "entry-container">When did you wake up?</p>
-                <DateTimePicker value = {entry.sleep} onChange = {handleWake}/>
+                <DateTimePicker value = {entry.sleep_end} onChange = {handleWake}/>
             </EntryContainer>
 
             <EntryContainer>
