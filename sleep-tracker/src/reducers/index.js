@@ -77,6 +77,7 @@ export const reducer = (state = defaultState, action) => {
             }
 
         case DELETE_SLEEP_DATA: //update state to deleting so that we can trigger our useeffect
+        
             return {
                 ...state,
                 booleans: {
@@ -86,6 +87,7 @@ export const reducer = (state = defaultState, action) => {
             }
 
         case DONE_DELETING: //done deleting, update appropriately
+           
             return {
                 ...state,
                 boolans: {
@@ -93,7 +95,7 @@ export const reducer = (state = defaultState, action) => {
                     isDeleting: false
                 }
             }
-            
+
         default: return state
     }
 }

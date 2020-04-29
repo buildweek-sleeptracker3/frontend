@@ -59,6 +59,7 @@ const Login = props => {
         .then(res =>{
             localStorage.setItem("token",JSON.stringify(res.data.token))
             props.login(res.data.userId)
+            console.log(res)
             history.push('/home')
             
         })

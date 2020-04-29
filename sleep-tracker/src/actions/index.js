@@ -50,7 +50,6 @@ export const fetchSleepData = _ => dispatch => {
     axiosWithAuth()
         .get('/api/users/sleep')
         .then(res => {
-            console.log({res})
             dispatch({type: UPDATE_SLEEP_DATA, payload: res.data})
             })
         .catch(err => console.log(err))
@@ -58,6 +57,7 @@ export const fetchSleepData = _ => dispatch => {
 
 export const addSleepData = data => dispatch => {
     //post a new piece of sleep data. The response is just a success message, so we can't use it to update our data because we don't have the id of the entry added. Instead we'll just rerender the whole page anyways when we navigate, triggering a fetch.
+
     axiosWithAuth()
         .post('/api/users/sleep',data)
         .then(res => {

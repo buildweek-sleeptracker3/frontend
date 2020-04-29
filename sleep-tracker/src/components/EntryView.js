@@ -97,7 +97,7 @@ const EntryView = props => {
             
             props.addSleepData({userId: props.userId, sleep_start: entry.sleep_start, sleep_end: entry.sleep_end, hours: hoursSlept, mood: entry.mood})
             //redirect to view all data
-            history.push("/view-sleep-data")
+            history.push("/view-sleep-data") 
         }
     }
 
