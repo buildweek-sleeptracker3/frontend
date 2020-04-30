@@ -154,7 +154,7 @@ const Signup = _ => {
           .then(valid => { // either true or false
             setSubmitDisabled(!valid)
           })
-      }, [formValues])
+    }, [formValues])
 
 
     const onSubmit = evt => {
