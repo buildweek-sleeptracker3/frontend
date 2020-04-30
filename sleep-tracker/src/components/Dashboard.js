@@ -6,6 +6,16 @@ import { fetchSleepData } from '../actions/index'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import { formatData } from '../utils/formatData'
 
+import styled from 'styled-components'
+
+const StyledDiv = styled.div`
+    margin: 0 2%;
+    .graph {
+        display: flex;
+        justify-content: center;
+        background: #a9a9a9;
+    }
+`
 
 const mapStateToProps = state => {
     return {
@@ -15,44 +25,34 @@ const mapStateToProps = state => {
 }
 
 
-//BRIAN TODO - MAKE A GET REQUEST HERE AND SET UP STATE
 
 //This renders the sleep/mood calculations
 const Dashboard = props => {
 
-    //BRIAN TODO #1 - SET UP STATE USING USESTATE HOOK
+    //set up state for the data
     const [sleepData, setSleepData] = useState([])
 
-    //BRIAN TODO #2 - UPDATE STATE USING A GET REQUEST
-    axiosWithAuth()
+    //update state using a get request, done by brian
+
+    useEffect(_ => {
+        axiosWithAuth()
         .get('/api/users/sleep')
         .then(res => {
-            console.log("Get Request Result:", res)
            setSleepData(res.data)
         }) 
         .catch(err => console.log(err))
+
+    },[])
+    
     
 
-    //how to filter
+    //filter the state before feeding it to aggregated mood to format
     const filteredArray =  sleepData.filter(item => {
         return item.userId.toString() === props.userId
     })
 
     const aggregatedMood = formatData(filteredArray) 
     
-
-    
-
-    /////////
-    
-    //we have to update the shape of the data for it to work with the graphing library
-    // const binnedData = Object.keys(props.moodData).map(key => {
-    //     return {
-    //         id: key,
-    //         bin: key,
-    //         count: props.moodData[key]
-    //     }
-    // })
 
 
     let maxKey = ""
@@ -68,26 +68,46 @@ const Dashboard = props => {
             }
         })
 
-        console.log(maxScore, maxKey)
+        
     }
 
+    //themes for the graph
 
+    const axisStyle = {
+        stroke: "#e3e3e3",
+        strokeWidth: 2,
+        // label: PropTypes.shape({
+        //   bottom: PropTypes.object,
+        //   top: PropTypes.object,
+        // })
+    }
+
+    const tickStyle = { //doesn't do anything
+            stroke: "red",
+            tickLength: 1,
+            // label: PropTypes.shape({
+            //   bottom: PropTypes.object,
+            //   top: PropTypes.object,
+            // }
+        }
 
     //display a graph of the sleep data vs. mood
     if (!aggregatedMood) {return null}
 
     return ( 
-        <>
-            <h1>Your Sleep Mood</h1>
-            <h2> You're at your best when you get {maxKey} hours of sleep.</h2>
+        <StyledDiv>
+            <h1>Your Sleep Stats</h1>
+            <p> You're at your best when you get {maxKey} hours of sleep.</p>
 
-            <HomeButton />
-            <Histogram width = "700" height = "500" binType = "categorical">
-                <BarSeries binnedData = {aggregatedMood.binned}/>
-                <XAxis label = "Hours of sleep"/>
-                <YAxis label = "Mood"/>
-            </Histogram>
-        </> 
+            
+            <div className = "graph">
+                <Histogram className = "bar-chart" width = "700" height = "500" binType = "categorical">
+                    <BarSeries className = "bar-series" binnedData = {aggregatedMood.binned}/>
+                    <XAxis axisStyles = {axisStyle} className = "axis" label = "Hours of sleep"/>
+                    <YAxis axisStyles = {axisStyle} className = "axis" label = "Mood"/>
+                </Histogram>
+            </div>
+        </StyledDiv> 
     )
 }
 

@@ -10,7 +10,8 @@ import Dashboard from './components/Dashboard.js';
 import SleepView from './components/sleepdata/SleepView.js'
 import EntryView from './components/EntryView.js';
 import LogoutButton from './components/buttons/LogoutButton'
-
+import HomeButton from './components/buttons/HomeButton'
+import { StyledNav } from './styled/index'
 
 
 
@@ -19,7 +20,17 @@ function App(props) {
   
   return (
     <div>
-      <LogoutButton />
+      
+      <StyledNav>
+        <div className = "logo">
+          <h2>Sleep Tracker</h2>
+        </div>
+        <div className = "buttons">
+          <LogoutButton />
+          <HomeButton />
+        </div>
+      </StyledNav>
+
       <Switch>
 
         <Route path='/login'>

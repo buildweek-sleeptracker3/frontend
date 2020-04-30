@@ -3,10 +3,29 @@ import { connect } from 'react-redux'
 import DayDisplayCard from './DayDisplayCard'
 import { fetchSleepData } from '../../actions/index'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
 
-import HomeButton from '../buttons/HomeButton'
+const StyledDiv = styled.div`
+    padding: 0 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
 
+    .sleep-head {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+
+        button {
+            height: 40px;
+            align-self: center;
+        }
+
+    }
+
+
+`
 const mapStateToProps = state => {
     return {
         data: state.data,
@@ -36,16 +55,18 @@ const SleepView = props => {
     //whenever we edit, delete, or render the page for the first time, refresh the data
     useEffect( _ => {
         refreshData() 
-    },[props.isEditing, props.isDeleting, props.isAdding]) 
+    },[]) //props.isEditing, props.isAdding, props.isDeleting
     
     //data initializes as null, so we'll wait until the API fetches new data to render
     if (!props.data) {return <h1>Loading...</h1>}
     
     return ( 
-        <>
-            <h1>Your Nightly Rests</h1> 
-            <button onClick = {handleNewNav}>New Entry</button>
-            <HomeButton />
+        <StyledDiv>
+            <div className = "sleep-head">
+                <h1>Sleep Diary</h1> 
+                <button onClick = {handleNewNav}>+ New Entry</button>
+            </div>
+            
         
             {props.data.map(item => {
                 if(item.userId.toString() === props.userId) {
@@ -53,7 +74,7 @@ const SleepView = props => {
                 }
                 
                 })}  
-        </>
+        </StyledDiv>
     )
 
 }

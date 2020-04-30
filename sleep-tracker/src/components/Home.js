@@ -5,8 +5,10 @@ import { fetchSleepData } from '../actions/index'
 import { formatData } from '../utils/formatData'
 
 import { connect } from 'react-redux'
-import axios from 'axios'
-import { axiosWithAuth } from '../utils/axiosWithAuth'
+// import axios from 'axios'
+// import { axiosWithAuth } from '../utils/axiosWithAuth'
+
+
 
 
 const HomeContainer = styled.div`
@@ -29,14 +31,14 @@ const HomeContainer = styled.div`
     button {
         align-self: flex-end;
         font-size: 1rem;
-        border-radius: 5px;
-        background: white;
+        // border-radius: 5px;
+        // background: white;
         /* text-decoration: */
 
-        &:hover {
-            background: grey;
-            color: white;
-        }
+        // &:hover {
+        //     background: grey;
+        //     color: white;
+        // }
     }
 
 `
@@ -92,21 +94,23 @@ const Home = props => {
     <>
         <h1>Welcome, user number {props.id}</h1>
         <HomeContainer className = "home-container">
-            <h2> Find out how much sleep is right for you!</h2>
-            
+            <h2> Find out how much sleep is right for you</h2>
+            <p>Not everybody needs the same amount of sleep. Using your sleep data, we show you the amount of sleep you'll need to target to be at your best.</p>
             <button name = "dashboard" onClick = {handleButtonClick} >
-                Learn more
+                See your dashboard
             </button>
     
         </HomeContainer>
         <HomeContainer className = "home-container">
-            <h2>Check out past sleep entries</h2>
+            <h2>View your sleep diary</h2>
+            <p>View, edit, and delete past entries.</p>
             <button name = "stats" onClick = {handleButtonClick}>
                 Go now
             </button>
         </HomeContainer>
         <HomeContainer className = "home-container">
             <h2>Create a new entry</h2>
+            <p>Log your sleep and wake times as well as your daytime mood.</p>
             <button name = "add" onClick = {handleButtonClick}>Add last night's sleep</button>
         </HomeContainer>
     </> )

@@ -64,21 +64,24 @@ export const reducer = (state = defaultState, action) => {
             }
 
         case UPDATE_EDIT: //update state based on our edit
-            let index = ""
+            // let index = ""
         //find the index of where the object with the id i'm editing is 
-            state.data.map((datum, i) => {
+            const newArray = state.data.map((datum, i) => {
                 if (datum.id === action.payload.id) {
-                    index = i
+                    return action.payload
+                } else {
+                    return datum
                 }
             })
             return {
                 ...state,
-                [state.data[index]]: action.payload
+                // [state.data[index]]: action.payload
+                data: newArray
 
             }
 
         case DELETE_SLEEP_DATA: //update state to deleting so that we can trigger our useeffect
-        
+            
             return {
                 ...state,
                 booleans: {
@@ -88,16 +91,22 @@ export const reducer = (state = defaultState, action) => {
             }
 
         case DONE_DELETING: //done deleting, update appropriately
-           
+           console.log(action.payload)
+            const keepArray = state.data.filter(item => {
+               return item.id != action.payload
+           })
+
+           console.log(keepArray)
             return {
                 ...state,
+                data: keepArray,
                 booleans: {
                     ...state.booleans,
                     isDeleting: false
                 }
             }
 
-        case ADD_SLEEP_DATA: 
+        case ADD_SLEEP_DATA: //just tells state that we'll be adding
 
             return {
                 ...state,
@@ -107,10 +116,14 @@ export const reducer = (state = defaultState, action) => {
                 }
             }
 
-        case DONE_ADDING_DATA: 
-
+        case DONE_ADDING_DATA: //state knows we've added it and updates with the response
+            
         return {
             ...state,
+            data: [
+                ...state.data,
+                action.payload
+            ],
             booleans: {
                 ...state.booleans,
                 isAdding: false
