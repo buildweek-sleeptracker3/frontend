@@ -52,6 +52,13 @@ const Confirmation = styled.div`
             border-radius: 10px;
             background-color: #39859D;
             color: #E5EFF2;
+
+            &:hover{
+                    border: 3px solid white;
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    height: 45px;
+                }
         }
 `
 

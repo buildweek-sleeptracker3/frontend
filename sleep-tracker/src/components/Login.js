@@ -22,7 +22,7 @@ const LoginStyle =styled.div`
 
     form {
         width:280px;
-        
+
             label{
                 color: #A7A7A7;
             }
@@ -49,6 +49,13 @@ const LoginStyle =styled.div`
                 border-radius: 10px;
                 background-color: #39859D;
                 color: #E5EFF2;
+
+                &:hover{
+                    border: 3px solid white;
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    height: 45px;
+                }
 
                     &:disabled{
                         background-color: #232323;

@@ -51,6 +51,13 @@ const SignupStyle = styled.div`
                 color: #E5EFF2;
                 font-size:1.2rem;
 
+                &:hover{
+                    border: 3px solid white;
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    height: 45px;
+                }
+
                 &:disabled{
                         background-color: #232323;
                         color: #A7A7A7;
