@@ -21,6 +21,8 @@ const SignupStyle = styled.div`
     }
 
     form {
+        width:280px;
+
             label{
                 color: #A7A7A7;
             }
@@ -36,6 +38,10 @@ const SignupStyle = styled.div`
                 background-color: #232323;
                 color: #E4E4E4;
 
+            }
+
+            .errors p{
+                color: red;
             }
 
             .submit-btn{
@@ -91,10 +97,12 @@ const formSchema = yup.object().shape({
 
     username: yup
         .string()
+        .min(3, 'Username Must be At Least 3 Characters Long')
         .required('You are Required to Select a Username'),
   
     password: yup
       .string()
+      .min(3, 'Password Must be At Least 3 Characters Long')
       .required('You Must Create a Password to Proceed'),
 });
 
@@ -235,14 +243,14 @@ const Signup = _ => {
 
                 <br /><br />
 
-                {/* <div className='errors'>
-                    {formErrors.firstName.length > 0 ? (<p>{formErrors.firstName}</p>) : null}
-                    {formErrors.lastName.length > 0 ? (<p>{formErrors.lastName}</p>) : null}
-                    {formErrors.age.length > 0 ? (<p>{formErrors.age}</p>) : null}
-                    {formErrors.email.length > 0 ? (<p>{formErrors.email}</p>) : null} 
-                    {formErrors.username.length > 0 ? (<p>{formErrors.username}</p>) : null}
-                    {formErrors.password.length > 0 ? (<p>{formErrors.password}</p>) : null}
-                </div> */}
+                <div className='errors'>
+                    <p>{formErrors.firstName}</p>
+                    <p>{formErrors.lastName}</p>
+                    <p>{formErrors.age}</p>
+                    <p>{formErrors.email}</p>
+                    <p>{formErrors.username}</p>
+                    <p>{formErrors.password}</p>
+                </div>
 
                 <br />
 

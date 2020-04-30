@@ -177,6 +177,11 @@ const Login = props => {
 
                 <br />< br/>
 
+                <div className='errors'>
+                    <p>{formErrors.username}</p>
+                    <p>{formErrors.password}</p>
+                </div>
+
                 <Link to='/signup'>
                     <button className='signUp'>Sign Up</button>
                 </Link>

@@ -29,7 +29,7 @@ const HomeContainer = styled.div`
         font-size: 1rem;
         border-radius: 5px;
         background: white;
-        text-decoration:
+        /* text-decoration: */
 
         &:hover {
             background: grey;
