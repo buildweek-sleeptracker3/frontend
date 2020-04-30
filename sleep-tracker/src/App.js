@@ -27,10 +27,6 @@ function App() {
           <Signup />
         </Route>
 
-        <Route path='/signup-confirm'>
-          <SignupConfirm />
-        </Route>
-
         <PrivateRoute path='/dashboard' component = {Dashboard}/>
 
         <PrivateRoute path='/view-sleep-data' component = {SleepView}/>

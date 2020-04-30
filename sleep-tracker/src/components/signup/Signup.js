@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {Route, useHistory} from 'react-router-dom';
 import * as yup from 'yup'
 import SignupConfirm from './SignupConfirm';
 
@@ -65,17 +64,6 @@ const blankForm = {
 }
 
 
-const postUser = user => {
-    axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/register', user)
-    .then(res =>{
-      console.log(res)
-    })
-    .catch(err =>{
-      console.log(err)
-    })
-}
-
-
 const formSchema = yup.object().shape({
     first_name: yup
       .string()
@@ -111,7 +99,7 @@ const Signup = _ => {
 
     const [formValues, setFormValues] = useState(blankForm)
     const [formErrors, setFormErrors] = useState(blankForm)
-    const history = useHistory()
+    const [newUserInfo, setNewUserInfo] = useState([])
 
     const inputChange = evt => {
         const name = evt.target.name
@@ -135,39 +123,34 @@ const Signup = _ => {
           ...formValues,
           [name]: value
         })
-      }
+    }
+
+    const postUser = user => {
+        axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/register', user)
+        .then(res =>{
+          setNewUserInfo([...newUserInfo, res.data])
+          console.log(res)
+        })
+        .catch(err =>{
+          console.log(err)
+        })
+    }
+
 
     const onSubmit = evt => {
         evt.preventDefault()
-
-        const name = evt.target.name
-        const value = evt.target.value
-
-        yup
-          .reach(formSchema, name)
-          .validate(value)
-          .then(valid =>{
-            setFormErrors(
-              {...formErrors,
-              [name]:''})
-          })
-          .catch(err =>{
-            setFormErrors(
-              {...formErrors, 
-              [name]: err.errors[0]})
-          })
     
-        // const newUser = {
-        //     first_name: formValues.first_name,
-        //     last_name: formValues.last_name,
-        //     age:formValues.age,
-        //     email: formValues.email,
-        //     username: formValues.username,
-        //     password: formValues.password,
-        // }
+        const newUser = {
+            first_name: formValues.first_name,
+            last_name: formValues.last_name,
+            age:formValues.age,
+            email: formValues.email,
+            username: formValues.username,
+            password: formValues.password,
+        }
         
-        // postUser(newUser)
-        history.push('/signup-confirm')
+        postUser(newUser)
+        setFormValues(blankForm)
     }
 
     return(
@@ -260,9 +243,15 @@ const Signup = _ => {
                     type='submit'
                     value='Submit' />
             </form>
-            <Route path='/signup-confirm'>  
-                <SignupConfirm data={formValues} />
-            </Route>  
+
+            <br />
+
+            {
+                newUserInfo.map(item =>{
+                    return(<SignupConfirm data={item} />)
+                })
+            }
+
         </SignupStyle>
     )
 }

@@ -63,10 +63,10 @@ const SignupConfirm = props => {
             <h3>Your Profile Details Are Below</h3>
 
             <div className='userDetials'>
-                <p><span>Name:</span> &nbsp; </p>
-                <p><span>Age:</span> &nbsp; </p>
-                <p><span>Email:</span> &nbsp; </p>
-                <p><span>Username:</span> &nbsp; </p>
+                <p><span>Name:</span> &nbsp; {props.data.first_name} {props.data.last_name}</p>
+                <p><span>Age:</span> &nbsp; {props.data.age}</p>
+                <p><span>Email:</span> &nbsp; {props.data.email}</p>
+                <p><span>Username:</span> &nbsp; {props.data.username}</p>
             </div>
 
             <br />
