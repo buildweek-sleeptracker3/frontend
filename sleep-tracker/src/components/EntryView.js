@@ -136,7 +136,7 @@ const EntryView = props => {
 
         if (props.isEditing) {
             //if we're editing, we'll use the appropriate action
-            props.submitEditModal(entry)
+            props.submitEditModal({...entry, hours: hoursSlept})
 
         } else {
             // If we are adding a new entry, send a post request to do that entry and set the state to not editing anymore.
