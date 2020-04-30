@@ -91,16 +91,22 @@ export const reducer = (state = defaultState, action) => {
             }
 
         case DONE_DELETING: //done deleting, update appropriately
-           
+           console.log(action.payload)
+            const keepArray = state.data.filter(item => {
+               return item.id != action.payload
+           })
+
+           console.log(keepArray)
             return {
                 ...state,
+                data: keepArray,
                 booleans: {
                     ...state.booleans,
                     isDeleting: false
                 }
             }
 
-        case ADD_SLEEP_DATA: 
+        case ADD_SLEEP_DATA: //just tells state that we'll be adding
 
             return {
                 ...state,
@@ -110,7 +116,7 @@ export const reducer = (state = defaultState, action) => {
                 }
             }
 
-        case DONE_ADDING_DATA: 
+        case DONE_ADDING_DATA: //state knows we've added it and updates with the response
             
         return {
             ...state,

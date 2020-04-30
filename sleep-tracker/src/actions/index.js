@@ -72,12 +72,12 @@ export const addSleepData = data => dispatch => {
 
 export const deleteSleepData = data => dispatch => {
     //delete a piece of sleep data.
-    dispatch({type: DELETE_SLEEP_DATA, payload: data.id})
+    dispatch({type: DELETE_SLEEP_DATA})
     axiosWithAuth()
         .delete(`/api/users/sleep/${data.id}`)
         .then(res => {
             
-            dispatch({type: DONE_DELETING})
+            dispatch({type: DONE_DELETING, payload: data.id})
             
         })
         .catch(err => console.log(err))
