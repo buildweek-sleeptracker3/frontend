@@ -81,7 +81,7 @@ export const reducer = (state = defaultState, action) => {
             }
 
         case DELETE_SLEEP_DATA: //update state to deleting so that we can trigger our useeffect
-        
+            
             return {
                 ...state,
                 booleans: {
@@ -111,9 +111,13 @@ export const reducer = (state = defaultState, action) => {
             }
 
         case DONE_ADDING_DATA: 
-
+            
         return {
             ...state,
+            data: [
+                ...state.data,
+                action.payload
+            ],
             booleans: {
                 ...state.booleans,
                 isAdding: false

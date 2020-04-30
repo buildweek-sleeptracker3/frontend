@@ -36,7 +36,7 @@ const SleepView = props => {
     //whenever we edit, delete, or render the page for the first time, refresh the data
     useEffect( _ => {
         refreshData() 
-    },[props.isEditing, props.isDeleting, props.isAdding]) 
+    },[props.isAdding, props.isDeleting]) //props.isEditing, , 
     
     //data initializes as null, so we'll wait until the API fetches new data to render
     if (!props.data) {return <h1>Loading...</h1>}

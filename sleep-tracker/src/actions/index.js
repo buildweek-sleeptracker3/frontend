@@ -65,17 +65,18 @@ export const addSleepData = data => dispatch => {
         .post('/api/users/sleep',data)
         .then(res => {
             console.log(res)
-            dispatch({type: DONE_ADDING_DATA})
+            dispatch({type: DONE_ADDING_DATA, payload: res.data})
         })
         .catch(err => console.log(err))
 }
 
 export const deleteSleepData = data => dispatch => {
     //delete a piece of sleep data.
-    dispatch({type: DELETE_SLEEP_DATA})
+    dispatch({type: DELETE_SLEEP_DATA, payload: data.id})
     axiosWithAuth()
         .delete(`/api/users/sleep/${data.id}`)
         .then(res => {
+            
             dispatch({type: DONE_DELETING})
             
         })
