@@ -10,7 +10,7 @@ var dateFormat = require('dateformat')
 const DayCard = styled.div`
 
 border: 1px solid gray;
-width: 60%;
+width: 80%;
 border-radius: 5px;
 margin: 2% 0;
 padding: 1% 2%;
@@ -51,7 +51,7 @@ const DayDisplayCard = props => {
     //render a card that displays the data and some buttons to edit or delete the entry
     return(
         <DayCard>
-            <p>{sleepDate}</p>
+            <p><strong>{sleepDate}</strong></p>
             <div className = "sleep-times">
                 <p>Asleep: {sleepStart} | Awake: {sleepEnd} | Asleep for {data.hours} hours. | Mood: {data.mood} </p>
                 <button onClick = {handleEditButton}>Edit Entry</button>

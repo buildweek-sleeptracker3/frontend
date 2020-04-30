@@ -10,7 +10,7 @@ padding: 0 2%;
 
 button {
     margin: 2% 4%;
-    padding: 2% 2%;
+    padding: 2% 4%;
     // height: 30px;
     // width: 100px;
     border-radius: 5px;
@@ -32,7 +32,7 @@ button {
     justify-content: flex-end;
 }
 .logo {
-    color: #a9a9a9;
+    color: #e3e3e3;
 }
 
 `
