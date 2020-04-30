@@ -14,6 +14,10 @@ const EntryContainer = styled.div`
 `
 const StyledDiv = styled.div`
     margin: 0 2%;
+    
+    h1 {
+        margin-bottom: 1%;
+    }
 
     display: flex;
     flex-direction: column;
@@ -27,8 +31,14 @@ const StyledDiv = styled.div`
 
     .submit-div {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         margin-top: 4%;
+        width: 100%;
+
+        button {
+            // padding: 2% 4%;
+            padding: 5px 10px;
+        }
     }
 
     .green-means-go {
@@ -40,6 +50,8 @@ const StyledDiv = styled.div`
             background: #1F1F1F;
         }
     }
+
+    margin-bottom: 4%;
 `
 const MoodPicker = styled.div`
     display: flex;
@@ -49,7 +61,7 @@ const MoodPicker = styled.div`
 
     .mood-button {
         font-size: 1.6rem;
-        padding: 2%;
+        padding: 10px;
         border-radius: 5px;
         border: 1px solid #272727;
 
@@ -150,7 +162,7 @@ const EntryView = props => {
     //display a form with the appropriate buttons
     return(
         <StyledDiv>
-        <h1>New Entry</h1>
+        <h1>{props.isEditing ? " Edit Entry" : "New Entry"}</h1>
         <form onSubmit = {handleSubmitForm}>
             <EntryContainer>
                 <p className = "entry-container">When did you go to sleep?</p>

@@ -15,44 +15,29 @@ const mapStateToProps = state => {
 }
 
 
-//BRIAN TODO - MAKE A GET REQUEST HERE AND SET UP STATE
 
 //This renders the sleep/mood calculations
 const Dashboard = props => {
 
-    //BRIAN TODO #1 - SET UP STATE USING USESTATE HOOK
+    //set up state for the data
     const [sleepData, setSleepData] = useState([])
 
-    //BRIAN TODO #2 - UPDATE STATE USING A GET REQUEST
+    //update state using a get request, done by brian
     axiosWithAuth()
         .get('/api/users/sleep')
         .then(res => {
-            console.log("Get Request Result:", res)
            setSleepData(res.data)
         }) 
         .catch(err => console.log(err))
     
 
-    //how to filter
+    //filter the state before feeding it to aggregated mood to format
     const filteredArray =  sleepData.filter(item => {
         return item.userId.toString() === props.userId
     })
 
     const aggregatedMood = formatData(filteredArray) 
     
-
-    
-
-    /////////
-    
-    //we have to update the shape of the data for it to work with the graphing library
-    // const binnedData = Object.keys(props.moodData).map(key => {
-    //     return {
-    //         id: key,
-    //         bin: key,
-    //         count: props.moodData[key]
-    //     }
-    // })
 
 
     let maxKey = ""
@@ -68,7 +53,7 @@ const Dashboard = props => {
             }
         })
 
-        console.log(maxScore, maxKey)
+        
     }
 
 
