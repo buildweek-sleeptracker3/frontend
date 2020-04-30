@@ -21,7 +21,7 @@ export const formatData = rawData => {
     }
 
 
-    const rawDataKeys= Object.keys(rawData) //iterate through and switch case for the hours 
+    const rawDataKeys= Object.keys(rawData) //iterate through and add mood rating to an array per category/bin so that it can be averaged next 
 
     rawDataKeys.map(key => { 
         let currHours = rawData[key].hours
