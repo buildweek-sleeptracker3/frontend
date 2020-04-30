@@ -64,16 +64,19 @@ export const reducer = (state = defaultState, action) => {
             }
 
         case UPDATE_EDIT: //update state based on our edit
-            let index = ""
+            // let index = ""
         //find the index of where the object with the id i'm editing is 
-            state.data.map((datum, i) => {
+            const newArray = state.data.map((datum, i) => {
                 if (datum.id === action.payload.id) {
-                    index = i
+                    return action.payload
+                } else {
+                    return datum
                 }
             })
             return {
                 ...state,
-                [state.data[index]]: action.payload
+                // [state.data[index]]: action.payload
+                data: newArray
 
             }
 

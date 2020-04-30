@@ -34,7 +34,7 @@ export const submitEditModal = data => dispatch => {
         .put(`/api/users/sleep/${data.id}`, data)
         .then(res => {
             console.log(res.data.data)
-            //update the datum that we just updated in state... this isn't totally necessary but I wanted to prove that I could
+            //update the datum that we just updated in state
             dispatch({type: UPDATE_EDIT, payload: res.data.data})
         })
         .catch(err => console.log(err))
