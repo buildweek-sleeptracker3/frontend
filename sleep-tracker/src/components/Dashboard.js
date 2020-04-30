@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Histogram, XAxis, YAxis, BarSeries, DensitySeries } from '@data-ui/histogram'
 import HomeButton from './buttons/HomeButton'
 import { fetchSleepData } from '../actions/index'
-
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 import { formatData } from '../utils/formatData'
 
 
 const mapStateToProps = state => {
     return {
-        // moodData: state.sleepMood,
-        rawData: state.data, //<----comment me out when done BRIAN TODO
-        userId: state.userId //<--- use props.id to access the user userId
+        
+        userId: state.userId 
     }
 }
 
@@ -21,33 +20,25 @@ const mapStateToProps = state => {
 //This renders the sleep/mood calculations
 const Dashboard = props => {
 
-    /////////BRIAN TODO - YOU CAN COMMENT OUT THIS USEEFFECT WHEN YOU'RE DONE
-    useEffect(_ => {
-        props.fetchSleepData()
-
-    },[])
-    ///////END COMMENTING
-
     //BRIAN TODO #1 - SET UP STATE USING USESTATE HOOK
+    const [sleepData, setSleepData] = useState([])
 
     //BRIAN TODO #2 - UPDATE STATE USING A GET REQUEST
-
-//     axiosWithAuth()
-//         .get('/api/users/sleep')
-//         .then(res => {
-//             <--- UPDATE LOCAL STATE WITH RES AFTER FILTERING IT BY USERID
-//         .catch(err => console.log(err))
-//      }
+    axiosWithAuth()
+        .get('/api/users/sleep')
+        .then(res => {
+            console.log("Get Request Result:", res)
+           setSleepData(res.data)
+        }) 
+        .catch(err => console.log(err))
+    
 
     //how to filter
-    //tempArray =  YOUR RESPONSE ARRAY.map(item => {
-    //     if(item.userId.toString() === props.userId) {
-    //         return item
-    //     }
-        
-    //     })
+    const filteredArray =  sleepData.filter(item => {
+        return item.userId.toString() === props.userId
+    })
 
-    const aggregatedMood = formatData(props.rawData) //replace props.raw data with your state
+    const aggregatedMood = formatData(filteredArray) 
     
 
     
