@@ -4,7 +4,7 @@ import { LOGIN, SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL, ADD_SLEEP_DATA, DONE_ADDING_D
 
 const defaultState = {
     userId: window.localStorage.getItem("userId"),
-    data: null,
+    data: [],
     sleepMood: dataSleepMood, //still waiting on an endpoint for this
     booleans: {
         isEditing: false,
@@ -14,7 +14,7 @@ const defaultState = {
     editModal: {
         hours: "",
         id: "",
-        mood: "",
+        mood: 4,
         sleep_end: new Date(),
         sleep_start: new Date(),
         userId: ""
