@@ -20,7 +20,7 @@ export const login = userId => dispatch => {
     dispatch({type: LOGIN, payload: userId})
 }
 
-export const showEditModal = (data) => dispatch => {
+export const showEditModal = data => dispatch => {
     //This reveals an edit form by toggling "isEditing" to true
     dispatch({type: SHOW_EDIT_MODAL, payload: data})
 }
@@ -51,6 +51,7 @@ export const fetchSleepData = _ => dispatch => {
     axiosWithAuth()
         .get('/api/users/sleep')
         .then(res => {
+            console.log(res)
             dispatch({type: UPDATE_SLEEP_DATA, payload: res.data})
             })
         .catch(err => console.log(err))
