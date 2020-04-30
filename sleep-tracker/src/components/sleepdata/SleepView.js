@@ -58,7 +58,7 @@ const SleepView = props => {
     },[]) //props.isEditing, props.isAdding, props.isDeleting
     
     //data initializes as null, so we'll wait until the API fetches new data to render
-    if (!props.data) {return <h1>Loading...</h1>}
+    if (props.data.length === 0) {return <h1>Loading...</h1>}
     
     return ( 
         <StyledDiv>
