@@ -9,7 +9,7 @@ const HomeButton = _ => {
         event.preventDefault();
         history.push("/home")
     }
-    return <button onClick = {handleNavHome}>Back Home</button>
+    return <button onClick = {handleNavHome}>Home</button>
 }
 
 export default HomeButton

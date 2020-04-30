@@ -20,9 +20,15 @@ function App(props) {
   
   return (
     <div>
+      
       <StyledNav>
-        <LogoutButton />
-        <HomeButton />
+        <div className = "logo">
+          <h2>Sleep Tracker</h2>
+        </div>
+        <div className = "buttons">
+          <LogoutButton />
+          <HomeButton />
+        </div>
       </StyledNav>
 
       <Switch>
