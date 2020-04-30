@@ -9,29 +9,62 @@ import HomeButton from './buttons/HomeButton'
 
 
 const EntryContainer = styled.div`
-
+    
 
 `
+const StyledDiv = styled.div`
+    margin: 0 2%;
 
-const MoodPicker = styled.div`
     display: flex;
-   
-
-    button {
-        
-        border: none;
-        border-radius: 5px;
-        padding: 2%;
-        margin: 0 2%;
-
-        font-size: 1.6rem;
-
-        
+    flex-direction: column;
+    align-items: center;
+    .date-time {
+        width: 280px;
+        * {
+            color: #e3e3e3;
+        }
     }
 
+    .submit-div {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4%;
+    }
+
+    .green-means-go {
+        background: #08B16B;
+        border: 1px solid #08B16B;
+
+        &:hover {
+            color: #08B16B;
+            background: #1F1F1F;
+        }
+    }
+`
+const MoodPicker = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    
+
+    .mood-button {
+        font-size: 1.6rem;
+        padding: 2%;
+        border-radius: 5px;
+        border: 1px solid #272727;
+
+    }
     .selected-mood {
         background: #00b16a;
     }
+
+    .not-selected {
+        background: #272727;
+        
+    }
+
+   
+    
 `
 
 const mapStateToProps = state => {
@@ -116,35 +149,35 @@ const EntryView = props => {
     
     //display a form with the appropriate buttons
     return(
-        <>
+        <StyledDiv>
         <h1>New Entry</h1>
-        {props.isEditing? null : <HomeButton />} {/* if we're not editing then show a home button */}
         <form onSubmit = {handleSubmitForm}>
             <EntryContainer>
                 <p className = "entry-container">When did you go to sleep?</p>
-                <DateTimePicker value = {new Date(entry.sleep_start)} onChange = {handleSleep}/>
+                <DateTimePicker className = "date-time" value = {new Date(entry.sleep_start)} onChange = {handleSleep}/>
             </EntryContainer>
 
             <EntryContainer>
                 <p className = "entry-container">When did you wake up?</p>
-                <DateTimePicker value = {new Date(entry.sleep_end)} onChange = {handleWake}/>
+                <DateTimePicker className = "date-time" value = {new Date(entry.sleep_end)} onChange = {handleWake}/>
             </EntryContainer>
 
             <EntryContainer>
                 <p className = "entry-container">Rate your mood throughout the day.</p>
                 <MoodPicker className = "mood-picker">
-                    <button name = "1" className = {entry.mood.toString() === "1" ? "selected-mood" : null} onClick = {handleMood} aria-label = "scream emoji">😱</button>
-                    <button name = "2" className = {entry.mood.toString() === "2" ? "selected-mood" : null}onClick = {handleMood}  aria-label = "slight frown emoji">😕</button>
-                    <button name = "3" className = {entry.mood.toString() === "3" ? "selected-mood" : null}onClick = {handleMood} aria-label = "happy emoji">😊</button>
-                    <button name = "4" className = {entry.mood.toString() === "4" ? "selected-mood" : null}onClick = {handleMood} aria-label = "star-eye emoji">🤩</button>
+                    <button name = "1" className = {entry.mood.toString() === "1" ? "selected-mood mood-button" : "not-selected mood-button"} onClick = {handleMood} aria-label = "scream emoji">😱</button>
+                    <button name = "2" className = {entry.mood.toString() === "2" ? "selected-mood mood-button" : "not-selected mood-button"}onClick = {handleMood}  aria-label = "slight frown emoji">😕</button>
+                    <button name = "3" className = {entry.mood.toString() === "3" ? "selected-mood mood-button" : "not-selected mood-button"}onClick = {handleMood} aria-label = "happy emoji">😊</button>
+                    <button name = "4" className = {entry.mood.toString() === "4" ? "selected-mood mood-button" : "not-selected mood-button"}onClick = {handleMood} aria-label = "star-eye emoji">🤩</button>
                 </MoodPicker>
             </EntryContainer>
-            <button>{props.isEditing ? "Update" : "Submit Entry"}</button>
-            {/* If we're editing, show a cancel edit button. If we're not editing, show a nav to entries button. */}
-            {props.isEditing? <button onClick = {handleCancelEdit}>Cancel Edit</button> : <button onClick = {handleNavToEntries}>Back To All Entries</button>}
-            
+            <div className = "submit-div">
+                <button className = "green-means-go">{props.isEditing ? "Update" : "Submit Entry"}</button>
+                {/* If we're editing, show a cancel edit button. If we're not editing, show a nav to entries button. */}
+                {props.isEditing? <button onClick = {handleCancelEdit}>Cancel Edit</button> : <button onClick = {handleNavToEntries}>View Diary</button>}
+            </div>
         </form>
-        </>
+        </StyledDiv>
     )
 
 }
