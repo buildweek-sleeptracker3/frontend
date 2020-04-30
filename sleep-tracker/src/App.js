@@ -6,7 +6,6 @@ import PrivateRoute from './components/PrivateRoute'
 import Home from './components/Home.js';
 import Login from './components/Login.js';
 import Signup from './components/signup/Signup.js';
-import SignupConfirm from './components/signup/SignupConfirm.js'
 import Dashboard from './components/Dashboard.js';
 import SleepView from './components/sleepdata/SleepView.js'
 import EntryView from './components/EntryView.js';

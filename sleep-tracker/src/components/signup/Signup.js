@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import * as yup from 'yup'
@@ -50,6 +50,11 @@ const SignupStyle = styled.div`
                 background-color: #39859D;
                 color: #E5EFF2;
                 font-size:1.2rem;
+
+                &:disabled{
+                        background-color: #232323;
+                        color: #A7A7A7;
+                    }
             }
     }
 `
@@ -100,6 +105,7 @@ const Signup = _ => {
     const [formValues, setFormValues] = useState(blankForm)
     const [formErrors, setFormErrors] = useState(blankForm)
     const [newUserInfo, setNewUserInfo] = useState([])
+    const [submitDisabled, setSubmitDisabled] = useState(true)
 
     const inputChange = evt => {
         const name = evt.target.name
@@ -135,6 +141,13 @@ const Signup = _ => {
           console.log(err)
         })
     }
+
+    useEffect(() => {
+        formSchema.isValid(formValues)
+          .then(valid => { // either true or false
+            setSubmitDisabled(!valid)
+          })
+      }, [formValues])
 
 
     const onSubmit = evt => {
@@ -241,7 +254,8 @@ const Signup = _ => {
                     className='submit-btn'
                     name='submit'
                     type='submit'
-                    value='Submit' />
+                    value='Submit'
+                    disabled= {submitDisabled} />
             </form>
 
             <br />

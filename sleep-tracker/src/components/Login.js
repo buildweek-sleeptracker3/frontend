@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login } from '../actions/index'
@@ -21,6 +21,8 @@ const LoginStyle =styled.div`
     }
 
     form {
+        width:280px;
+        
             label{
                 color: #A7A7A7;
             }
@@ -35,7 +37,10 @@ const LoginStyle =styled.div`
                 box-sizing: border-box;
                 background-color: #232323;
                 color: #E4E4E4;
+            }
 
+            .errors p{
+                color: red;
             }
 
             .log-in{
@@ -44,6 +49,11 @@ const LoginStyle =styled.div`
                 border-radius: 10px;
                 background-color: #39859D;
                 color: #E5EFF2;
+
+                    &:disabled{
+                        background-color: #232323;
+                        color: #A7A7A7;
+                    }
             }
 
             .signUp{
@@ -97,6 +107,7 @@ const Login = props => {
 
     const [formValues, setFormValues] = useState(blankForm)
     const [formErrors, setFormErrors] = useState(blankForm)
+    const [submitDisabled, setSubmitDisabled] = useState(true)
     const history = useHistory()
 
     const inputChange = evt => {
@@ -121,7 +132,15 @@ const Login = props => {
           ...formValues,
           [name]: value
         })
-      }
+    }
+
+    useEffect(() => {
+        formSchema.isValid(formValues)
+          .then(valid => { // either true or false
+            setSubmitDisabled(!valid)
+          })
+      }, [formValues])
+
 
     const onLogin = evt => {
         evt.preventDefault()
@@ -163,8 +182,8 @@ const Login = props => {
                 <br /><br />
 
                 <div className='errors'>
-                    {formErrors.username.length > 0 ? (<p>{formErrors.username}</p>) : null}
-                    {formErrors.password.length > 0 ? (<p>{formErrors.password}</p>) : null}
+                    <p>{formErrors.username}</p>
+                    <p>{formErrors.password}</p>
                 </div>
 
                 <br />
@@ -173,14 +192,10 @@ const Login = props => {
                     className='log-in'
                     name='logIn'
                     type='submit'
-                    value='Log In' />
+                    value='Log In' 
+                    disabled={submitDisabled}/>
 
                 <br />< br/>
-
-                <div className='errors'>
-                    <p>{formErrors.username}</p>
-                    <p>{formErrors.password}</p>
-                </div>
 
                 <Link to='/signup'>
                     <button className='signUp'>Sign Up</button>
