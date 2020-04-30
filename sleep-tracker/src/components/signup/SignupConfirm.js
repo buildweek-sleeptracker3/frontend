@@ -52,6 +52,13 @@ const Confirmation = styled.div`
             border-radius: 10px;
             background-color: #39859D;
             color: #E5EFF2;
+
+            &:hover{
+                    border: 3px solid white;
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    height: 45px;
+                }
         }
 `
 
@@ -63,10 +70,10 @@ const SignupConfirm = props => {
             <h3>Your Profile Details Are Below</h3>
 
             <div className='userDetials'>
-                <p><span>Name:</span> &nbsp; </p>
-                <p><span>Age:</span> &nbsp; </p>
-                <p><span>Email:</span> &nbsp; </p>
-                <p><span>Username:</span> &nbsp; </p>
+                <p><span>Name:</span> &nbsp; {props.data.first_name} {props.data.last_name}</p>
+                <p><span>Age:</span> &nbsp; {props.data.age}</p>
+                <p><span>Email:</span> &nbsp; {props.data.email}</p>
+                <p><span>Username:</span> &nbsp; {props.data.username}</p>
             </div>
 
             <br />

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {Route, useHistory} from 'react-router-dom';
 import * as yup from 'yup'
 import SignupConfirm from './SignupConfirm';
 
@@ -21,6 +20,8 @@ const SignupStyle = styled.div`
     }
 
     form {
+        width:280px;
+
             label{
                 color: #A7A7A7;
             }
@@ -38,6 +39,10 @@ const SignupStyle = styled.div`
 
             }
 
+            .errors p{
+                color: red;
+            }
+
             .submit-btn{
                 width: 100%;
                 height: 35px;
@@ -45,6 +50,18 @@ const SignupStyle = styled.div`
                 background-color: #39859D;
                 color: #E5EFF2;
                 font-size:1.2rem;
+
+                &:hover{
+                    border: 3px solid white;
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    height: 45px;
+                }
+
+                &:disabled{
+                        background-color: #232323;
+                        color: #A7A7A7;
+                    }
             }
     }
 `
@@ -56,17 +73,6 @@ const blankForm = {
     email: '',
     username: '',
     password: '',
-}
-
-
-const postUser = user => {
-    axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/register', user)
-    .then(res =>{
-      console.log(res)
-    })
-    .catch(err =>{
-      console.log(err)
-    })
 }
 
 
@@ -91,10 +97,12 @@ const formSchema = yup.object().shape({
 
     username: yup
         .string()
+        .min(3, 'Username Must be At Least 3 Characters Long')
         .required('You are Required to Select a Username'),
   
     password: yup
       .string()
+      .min(3, 'Password Must be At Least 3 Characters Long')
       .required('You Must Create a Password to Proceed'),
 });
 
@@ -103,7 +111,8 @@ const Signup = _ => {
 
     const [formValues, setFormValues] = useState(blankForm)
     const [formErrors, setFormErrors] = useState(blankForm)
-    const history = useHistory()
+    const [newUserInfo, setNewUserInfo] = useState([])
+    const [submitDisabled, setSubmitDisabled] = useState(true)
 
     const inputChange = evt => {
         const name = evt.target.name
@@ -127,39 +136,41 @@ const Signup = _ => {
           ...formValues,
           [name]: value
         })
-      }
+    }
+
+    const postUser = user => {
+        axios.post('https://sleeptrackerbackend.herokuapp.com/api/auth/register', user)
+        .then(res =>{
+          setNewUserInfo([...newUserInfo, res.data])
+          console.log(res)
+        })
+        .catch(err =>{
+          console.log(err)
+        })
+    }
+
+    useEffect(() => {
+        formSchema.isValid(formValues)
+          .then(valid => { // either true or false
+            setSubmitDisabled(!valid)
+          })
+    }, [formValues])
+
 
     const onSubmit = evt => {
         evt.preventDefault()
-
-        const name = evt.target.name
-        const value = evt.target.value
-
-        yup
-          .reach(formSchema, name)
-          .validate(value)
-          .then(valid =>{
-            setFormErrors(
-              {...formErrors,
-              [name]:''})
-          })
-          .catch(err =>{
-            setFormErrors(
-              {...formErrors, 
-              [name]: err.errors[0]})
-          })
     
-        // const newUser = {
-        //     first_name: formValues.first_name,
-        //     last_name: formValues.last_name,
-        //     age:formValues.age,
-        //     email: formValues.email,
-        //     username: formValues.username,
-        //     password: formValues.password,
-        // }
+        const newUser = {
+            first_name: formValues.first_name,
+            last_name: formValues.last_name,
+            age:formValues.age,
+            email: formValues.email,
+            username: formValues.username,
+            password: formValues.password,
+        }
         
-        // postUser(newUser)
-        history.push('/signup-confirm')
+        postUser(newUser)
+        setFormValues(blankForm)
     }
 
     return(
@@ -235,14 +246,14 @@ const Signup = _ => {
 
                 <br /><br />
 
-                {/* <div className='errors'>
-                    {formErrors.firstName.length > 0 ? (<p>{formErrors.firstName}</p>) : null}
-                    {formErrors.lastName.length > 0 ? (<p>{formErrors.lastName}</p>) : null}
-                    {formErrors.age.length > 0 ? (<p>{formErrors.age}</p>) : null}
-                    {formErrors.email.length > 0 ? (<p>{formErrors.email}</p>) : null} 
-                    {formErrors.username.length > 0 ? (<p>{formErrors.username}</p>) : null}
-                    {formErrors.password.length > 0 ? (<p>{formErrors.password}</p>) : null}
-                </div> */}
+                <div className='errors'>
+                    <p>{formErrors.firstName}</p>
+                    <p>{formErrors.lastName}</p>
+                    <p>{formErrors.age}</p>
+                    <p>{formErrors.email}</p>
+                    <p>{formErrors.username}</p>
+                    <p>{formErrors.password}</p>
+                </div>
 
                 <br />
 
@@ -250,11 +261,18 @@ const Signup = _ => {
                     className='submit-btn'
                     name='submit'
                     type='submit'
-                    value='Submit' />
+                    value='Submit'
+                    disabled= {submitDisabled} />
             </form>
-            <Route path='/signup-confirm'>  
-                <SignupConfirm data={formValues} />
-            </Route>  
+
+            <br />
+
+            {
+                newUserInfo.map(item =>{
+                    return(<SignupConfirm data={item} />)
+                })
+            }
+
         </SignupStyle>
     )
 }
