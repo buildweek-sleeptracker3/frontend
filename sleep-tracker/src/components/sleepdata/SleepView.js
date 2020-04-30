@@ -57,6 +57,9 @@ const SleepView = props => {
         refreshData() 
     },[props.isAdding]) //props.isEditing, props.isAdding, props.isDeleting
     
+    
+    const totalHoursSlept = props.data.filter(item => {return item.userId == props.userId}).reduce((a, b) => a + b.hours, 0)
+    console.log (totalHoursSlept)
     //data initializes as null, so we'll wait until the API fetches new data to render
     if (props.data.length === 0) {return <h1>Loading...</h1>}
     
@@ -66,6 +69,7 @@ const SleepView = props => {
                 <h1>Sleep Diary</h1> 
                 <button onClick = {handleNewNav}>+ New Entry</button>
             </div>
+            <p>Wow, you've slept {totalHoursSlept} hours since you started logging! Keep up the hard work!</p>
             
         
             {/* display a card for each entry for that user */}
