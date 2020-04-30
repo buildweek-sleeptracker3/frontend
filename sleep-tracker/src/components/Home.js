@@ -9,7 +9,10 @@ import { connect } from 'react-redux'
 // import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 
+const StyledDiv = styled.div`
+    margin: 0 4%;
 
+`
 
 const HomeContainer = styled.div`
 
@@ -21,7 +24,7 @@ const HomeContainer = styled.div`
     flex-direction: column;
 
     padding: 4%;
-    margin: 4% 2%;
+    margin: 4% 0%;
 
     h2 {
         padding: 0;
@@ -91,8 +94,8 @@ const Home = props => {
    
     
     return ( 
-    <>
-        <h1>Welcome, user number {props.id}</h1>
+    <StyledDiv>
+        <h1>Welcome, user number {props.id}.</h1>
         <HomeContainer className = "home-container">
             <h2> Find out how much sleep is right for you</h2>
             <p>Not everybody needs the same amount of sleep. Using your sleep data, we show you the amount of sleep you'll need to target to be at your best.</p>
@@ -113,7 +116,7 @@ const Home = props => {
             <p>Log your sleep and wake times as well as your daytime mood.</p>
             <button name = "add" onClick = {handleButtonClick}>Add last night's sleep</button>
         </HomeContainer>
-    </> )
+    </StyledDiv> )
 
 }
 
