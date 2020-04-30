@@ -82,14 +82,7 @@ const Dashboard = props => {
         // })
     }
 
-    const tickStyle = { //doesn't do anything
-            stroke: "red",
-            tickLength: 1,
-            // label: PropTypes.shape({
-            //   bottom: PropTypes.object,
-            //   top: PropTypes.object,
-            // }
-        }
+    
 
     //display a graph of the sleep data vs. mood
     if (!aggregatedMood) {return null}
