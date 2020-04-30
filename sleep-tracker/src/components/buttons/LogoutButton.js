@@ -1,5 +1,8 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
+
+
 
 //This will remove tokens from application memory and push you back to the login page
 const LogoutButton = _ => {
