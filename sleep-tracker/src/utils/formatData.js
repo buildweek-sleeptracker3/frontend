@@ -4,20 +4,20 @@ export const formatData = rawData => {
     if (!rawData) {return null} //if the data isn't here yet then don't bother
 
     const format = { //start with just format of what we want
-        "0 - 5": [],
-        "5 - 5.5": [],
-        "5.5 - 6": [],
-        "6 - 6.5": [],
-        "6.5 - 7": [],
-        "7 - 7.5": [],
-        "7.5 - 8": [],
-        "8 - 8.5": [],
-        "8.5 - 9": [],
-        "9 - 9.5": [],
-        "9.5 - 10": [],
-        "10 - 10.5": [],
-        "10.5 - 11": [],
-        "11+": [],
+        "a. 0 - 5": [],
+        "b. 5 - 5.5": [],
+        "c. 5.5 - 6": [],
+        "d. 6 - 6.5": [],
+        "e. 6.5 - 7": [],
+        "f. 7 - 7.5": [],
+        "g. 7.5 - 8": [],
+        "h. 8 - 8.5": [],
+        "i. 8.5 - 9": [],
+        "j. 9 - 9.5": [],
+        "k. 9.5 - 10": [],
+        "l. 10 - 10.5": [],
+        "m. 10.5 - 11": [],
+        "n. 11+": [],
     }
 
 
@@ -27,33 +27,33 @@ export const formatData = rawData => {
         let currHours = rawData[key].hours
         let mood = rawData[key].mood
         if (currHours < 5) {
-            format["0 - 5"].push(mood)
+            format["a. 0 - 5"].push(mood)
         } else if (currHours < 5.5) {
-            format ["5 - 5.5"].push(mood)
+            format ["b. 5 - 5.5"].push(mood)
         } else if (currHours < 6) {/////////
-            format ["5.5 - 6"].push(mood)
+            format ["c. 5.5 - 6"].push(mood)
         } else if (currHours < 6.5) {
-            format ["6 - 6.5"].push(mood)
+            format ["d. 6 - 6.5"].push(mood)
         } else if (currHours < 7) {
-            format ["6.5 - 7"].push(mood)
+            format ["e. 6.5 - 7"].push(mood)
         } else if (currHours < 7.5) {
-            format ["7 - 7.5"].push(mood)
+            format ["f. 7 - 7.5"].push(mood)
         } else if (currHours < 8) {
-            format ["7.5 - 8"].push(mood)
+            format ["g. 7.5 - 8"].push(mood)
         } else if (currHours < 8.5) {
-            format ["8 - 8.5"].push(mood)
+            format ["h. 8 - 8.5"].push(mood)
         } else if (currHours < 9) {
-            format ["8.5 - 9"].push(mood)
+            format ["i. 8.5 - 9"].push(mood)
         } else if (currHours < 9.5) {
-            format ["9 - 9.5"].push(mood)
+            format ["j. 9 - 9.5"].push(mood)
         } else if (currHours < 10) {
-            format ["9.5 - 10"].push(mood)
+            format ["k. 9.5 - 10"].push(mood)
         } else if (currHours < 10.5) {
-            format ["10 - 10.5"].push(mood)
+            format ["l. 10 - 10.5"].push(mood)
         } else if (currHours < 11) {
-            format ["10.5 - 11"].push(mood)
+            format ["m. 10.5 - 11"].push(mood)
         } else {
-            format ["11+"].push(mood)
+            format ["n. 11+"].push(mood)
         } 
         
     })

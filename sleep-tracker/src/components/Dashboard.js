@@ -32,9 +32,22 @@ const Dashboard = props => {
     //set up state for the data
     const [sleepData, setSleepData] = useState([])
 
+    ///NEW CHANGE
+    const [aggregatedMood, setAggregatedMood] = useState({
+        binned: [{
+            id: "loading",
+            bin: "loading",
+            count: 1
+        }],
+        formatted: []
+    })
+    let filteredArray = []
+    ///
+    
     //update state using a get request, done by brian
 
-    useEffect(_ => {
+    useEffect( _ => {
+        
         axiosWithAuth()
         .get('/api/users/sleep')
         .then(res => {
@@ -44,16 +57,38 @@ const Dashboard = props => {
 
     },[])
     
+    //NEW CHANGE
+    useEffect ( _ => {
+        console.log(sleepData)
+        filteredArray =  sleepData.filter(item => {
+            return item.userId.toString() === props.userId.toString()
+        })
+        
+        const newAgg = formatData(filteredArray)
+        // console.log(newAgg)
+        setAggregatedMood(newAgg)
+
+    },[sleepData])
+    //
+
+    // const filteredArray =  sleepData.filter(item => {
+    //     return item.userId.toString() === props.userId
+    // })
+
+    // const aggregatedMood = formatData(filteredArray) 
+
     
-
-    //filter the state before feeding it to aggregated mood to format
-    const filteredArray =  sleepData.filter(item => {
-        return item.userId.toString() === props.userId
-    })
-
-    const aggregatedMood = formatData(filteredArray) 
     
+    
+    // useEffect( _ => {
+    //     //filter the state before feeding it to aggregated mood to format
+    //     const filteredArray =  sleepData.filter(item => {
+    //         return item.userId.toString() === props.userId
+    //     })
 
+    //      aggregatedMood = formatData(filteredArray) 
+        
+    // },[sleepData])
 
     let maxKey = ""
     //calculate when you're at your best
@@ -82,10 +117,9 @@ const Dashboard = props => {
         // })
     }
 
-    
-
     //display a graph of the sleep data vs. mood
-    if (!aggregatedMood) {return null}
+    if (!aggregatedMood) {return (<h1>Loading...</h1>)}
+    // if (!aggregatedMood) {return (<h1>Loading...</h1>)}
 
     return ( 
         <StyledDiv>
