@@ -31,10 +31,23 @@ const Dashboard = props => {
 
     //set up state for the data
     const [sleepData, setSleepData] = useState([])
-    let aggregatedMood = null;
+
+    ///NEW CHANGE
+    const [aggregatedMood, setAggregatedMood] = useState({
+        binned: [{
+            id: "loading",
+            bin: "loading",
+            count: 1
+        }],
+        formatted: []
+    })
+    let filteredArray = []
+    ///
+    
     //update state using a get request, done by brian
 
-    useEffect(_ => {
+    useEffect( _ => {
+        
         axiosWithAuth()
         .get('/api/users/sleep')
         .then(res => {
@@ -44,26 +57,41 @@ const Dashboard = props => {
 
     },[])
     
-    // let filteredArray =  sleepData.filter(item => {
+    //NEW CHANGE
+    useEffect ( _ => {
+        console.log(sleepData)
+        filteredArray =  sleepData.filter(item => {
+            return item.userId.toString() === props.userId.toString()
+        })
+        
+        const newAgg = formatData(filteredArray)
+        // console.log(newAgg)
+        setAggregatedMood(newAgg)
+
+    },[sleepData])
+    //
+
+    // const filteredArray =  sleepData.filter(item => {
     //     return item.userId.toString() === props.userId
     // })
 
-    // let aggregatedMood = formatData(filteredArray) 
+    // const aggregatedMood = formatData(filteredArray) 
 
     
-    useEffect( _ => {
-        //filter the state before feeding it to aggregated mood to format
-        const filteredArray =  sleepData.filter(item => {
-            return item.userId.toString() === props.userId
-        })
+    
+    
+    // useEffect( _ => {
+    //     //filter the state before feeding it to aggregated mood to format
+    //     const filteredArray =  sleepData.filter(item => {
+    //         return item.userId.toString() === props.userId
+    //     })
 
-         aggregatedMood = formatData(filteredArray) 
+    //      aggregatedMood = formatData(filteredArray) 
         
-    },[sleepData])
+    // },[sleepData])
 
     let maxKey = ""
     //calculate when you're at your best
-    // if (filteredArray) {return (<h1>Loading...</h1>)}
     if(aggregatedMood) {
         const sleepKeys = Object.keys(aggregatedMood.formatted)
         let maxScore = aggregatedMood.formatted[sleepKeys[0]]
@@ -89,17 +117,8 @@ const Dashboard = props => {
         // })
     }
 
-    // const tickStyle = { //doesn't do anything
-    //         stroke: "red",
-    //         tickLength: 1,
-    //         // label: PropTypes.shape({
-    //         //   bottom: PropTypes.object,
-    //         //   top: PropTypes.object,
-    //         // }
-    //     }
-
     //display a graph of the sleep data vs. mood
-    if (!aggregatedMood) {return (null)}
+    if (!aggregatedMood) {return (<h1>Loading...</h1>)}
     // if (!aggregatedMood) {return (<h1>Loading...</h1>)}
 
     return ( 
